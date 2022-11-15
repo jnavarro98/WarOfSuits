@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.janavarro.war_of_suits"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 3
         versionName "1.2"
