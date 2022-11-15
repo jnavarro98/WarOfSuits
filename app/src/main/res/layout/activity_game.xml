@@ -21,10 +21,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p1"
         app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
         app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
-        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p1"
         app:layout_constraintTop_toTopOf="@id/separator_middle" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/separator_button_card_p2"
@@ -46,17 +47,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.90" />
-
-    <com.janavarro.war_of_suits.components.iconButton.IconButtonView
-        android:id="@+id/bt_draw_card_p1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
-        app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
-        app:layout_constraintTop_toTopOf="@id/separator_button_card_p1"
-        app:title="Draw card" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/separator_left_current_card"
@@ -83,6 +73,17 @@
         app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
         app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
         app:layout_constraintTop_toTopOf="parent"
+        app:title="Draw card" />
+
+    <com.janavarro.war_of_suits.components.iconButton.IconButtonView
+        android:id="@+id/bt_draw_card_p1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
+        app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
+        app:layout_constraintTop_toTopOf="@id/separator_button_card_p1"
         app:title="Draw card" />
 
 

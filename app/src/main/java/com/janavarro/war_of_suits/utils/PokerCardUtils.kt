@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.annotation.DrawableRes
 import com.janavarro.war_of_suits.R
+import com.janavarro.war_of_suits.model.Card
 
 sealed class Suit(@DrawableRes val image: Int, open val score: Int = -1)
 class Diamonds(override val score: Int = -1) : Suit(R.drawable.ic_diamond, score)
@@ -44,5 +45,14 @@ class PokerCardUtils {
         val canvas = Canvas(image)
         canvas.drawText(text, 0F, baseline, paint)
         return image
+    }
+}
+
+fun Card.compareTo(card2: Card): Int {
+    val result = this.pokerValue.score.compareTo(card2.pokerValue.score)
+    return if (result == 0) {
+        this.suit.score.compareTo(card2.suit.score)
+    } else {
+        result
     }
 }
