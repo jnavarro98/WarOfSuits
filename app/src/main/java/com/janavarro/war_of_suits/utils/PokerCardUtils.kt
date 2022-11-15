@@ -6,29 +6,31 @@ import android.graphics.Paint
 import androidx.annotation.DrawableRes
 import com.janavarro.war_of_suits.R
 
+sealed class Suit(@DrawableRes val image: Int, open val score: Int = -1)
+class Diamonds(override val score: Int = -1) : Suit(R.drawable.ic_diamond, score)
+class Clubs(override val score: Int = -1) : Suit(R.drawable.ic_club, score)
+class Hearts(override val score: Int = -1) : Suit(R.drawable.ic_heart, score)
+class Spades(override val score: Int = -1) : Suit(R.drawable.ic_spade, score)
+object EmptySuit : Suit(-1, -1)
+
+enum class PokerValue(val score: Int, val symbol: String) {
+    Two(0, "2"),
+    Three(1, "3"),
+    Four(2, "4"),
+    Five(3, "5"),
+    Six(4, "6"),
+    Seven(5, "7"),
+    Eight(6, "8"),
+    Nine(7, "9"),
+    Ten(8, "10"),
+    J(9, "J"),
+    Q(10, "Q"),
+    K(11, "K"),
+    A(12, "A")
+}
 
 class PokerCardUtils {
-    sealed class Suit(@DrawableRes val image: Int)
-    class Diamonds() : Suit(R.drawable.ic_diamond)
-    class Clubs() : Suit(R.drawable.ic_club)
-    class Hearts() : Suit(R.drawable.ic_heart)
-    class Spade() : Suit(R.drawable.ic_spade)
 
-    sealed class Value(val score: Int, val symbol: String)
-    class Two() : Value(0, "2")
-    class Three() : Value(1, "3")
-    class Four() : Value(2, "4")
-    class Five() : Value(3, "5")
-    class Six() : Value(4, "6")
-    class Seven() : Value(5, "7")
-    class Eight() : Value(6, "8")
-    class Nine() : Value(7, "9")
-    class Ten() : Value(8, "10")
-    class J() : Value(9, "J")
-    class Q() : Value(10, "Q")
-    class K() : Value(11, "K")
-    class A() : Value(12, "A")
-    class Empty() : Value(-1, "")
 
     fun textAsBitmap(text: String, textSize: Float, textColor: Int): Bitmap? {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)

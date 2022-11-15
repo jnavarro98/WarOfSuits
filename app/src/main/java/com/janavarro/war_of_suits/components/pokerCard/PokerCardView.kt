@@ -4,9 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.databinding.ViewCardBinding
-import com.janavarro.war_of_suits.utils.PokerCardUtils
+import com.janavarro.war_of_suits.utils.EmptySuit
+import com.janavarro.war_of_suits.utils.PokerValue
+import com.janavarro.war_of_suits.utils.Suit
 
 class PokerCardView @JvmOverloads constructor(
     context: Context,
@@ -15,18 +16,44 @@ class PokerCardView @JvmOverloads constructor(
 
     private val binding = ViewCardBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var suit: Int = 0
+    var suit: Suit = EmptySuit
         set(imageId) {
             field = imageId
             binding.cardContent.suit = suit
+            drawStars()
         }
 
-    var value: PokerCardUtils.Value = PokerCardUtils.Empty()
-        set(newTitle) {
-            field = newTitle
-            binding.topValue.text = field.symbol
-            binding.bottomValue.text = field.symbol
-            binding.cardContent.value = field.score
+    var pokerValue: PokerValue? = null
+        set(newPokerValue) {
+            field = newPokerValue
+            newPokerValue?.let {
+                binding.topValue.text = newPokerValue.symbol
+                binding.bottomValue.text = newPokerValue.symbol
+                binding.cardContent.value = newPokerValue
+            }
         }
 
+
+    private fun drawStars() {
+        when (suit.score) {
+            0 -> {
+                binding.topStar.visibility = VISIBLE
+            }
+            1 -> {
+                binding.leftStar.visibility = VISIBLE
+                binding.rightStar.visibility = VISIBLE
+            }
+            2 -> {
+                binding.topStar.visibility = VISIBLE
+                binding.leftStar.visibility = VISIBLE
+                binding.rightStar.visibility = VISIBLE
+            }
+            3 -> {
+                binding.topStar.visibility = VISIBLE
+                binding.bottomStar.visibility = VISIBLE
+                binding.leftStar.visibility = VISIBLE
+                binding.rightStar.visibility = VISIBLE
+            }
+        }
+    }
 }

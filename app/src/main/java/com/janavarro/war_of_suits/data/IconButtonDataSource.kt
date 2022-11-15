@@ -9,7 +9,7 @@ class IconButtonDataSource(iconButtons: List<IconButton>) {
     private val initialIconButtonList = iconButtons
     private val iconButtonLiveData = MutableLiveData(initialIconButtonList)
 
-    /* Adds iconButton to liveData and posts value. */
+    /* Adds iconButton to liveData and posts pokerValue. */
     fun addIconButton(iconButton: IconButton) {
         val currentList = iconButtonLiveData.value
         if (currentList == null) {
@@ -21,7 +21,7 @@ class IconButtonDataSource(iconButtons: List<IconButton>) {
         }
     }
 
-    /* Removes iconButton from liveData and posts value. */
+    /* Removes iconButton from liveData and posts pokerValue. */
     fun removeIconButton(iconButton: IconButton) {
         val currentList = iconButtonLiveData.value
         if (currentList != null) {
@@ -35,7 +35,7 @@ class IconButtonDataSource(iconButtons: List<IconButton>) {
 
     /* Returns iconButton given an ID.
     fun getIconButtonForId(id: Long): IconButton? {
-        iconButtonLiveData.value?.let { iconButtons ->
+        iconButtonLiveData.pokerValue?.let { iconButtons ->
             return iconButtons.firstOrNull{ it.id == id}
         }
         return null

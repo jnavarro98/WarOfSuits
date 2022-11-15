@@ -5,27 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import com.janavarro.war_of_suits.model.Card
 
 /* Handles operations on iconButtonsLiveData and holds details about it. */
-class DeckDataSource(deck: List<Card>) {
+class DeckDataSource(deck: ArrayDeque<Card>) {
     private val initialDeck = deck
     private val deckLiveData = MutableLiveData(initialDeck)
 
-    /* Adds iconButton to liveData and posts value. */
+    /* Adds iconButton to liveData and posts pokerValue. */
     fun addCard(card: Card) {
         val currentList = deckLiveData.value
         if (currentList == null) {
-            deckLiveData.postValue(listOf(card))
+            deckLiveData.postValue(ArrayDeque(listOf(card)))
         } else {
-            val updatedList = currentList.toMutableList()
+            val updatedList = ArrayDeque(currentList.toMutableList())
             updatedList.add(0, card)
             deckLiveData.postValue(updatedList)
         }
     }
 
-    /* Removes iconButton from liveData and posts value. */
+    /* Removes iconButton from liveData and posts pokerValue. */
     fun removeCard(card: Card) {
         val currentList = deckLiveData.value
         if (currentList != null) {
-            val updatedList = currentList.toMutableList()
+            val updatedList = ArrayDeque(currentList.toMutableList())
             updatedList.remove(card)
             deckLiveData.postValue(updatedList)
         }
@@ -35,20 +35,20 @@ class DeckDataSource(deck: List<Card>) {
 
     /* Returns iconButton given an ID.
     fun getIconButtonForId(id: Long): IconButton? {
-        iconButtonLiveData.value?.let { iconButtons ->
+        iconButtonLiveData.pokerValue?.let { iconButtons ->
             return deck.firstOrNull{ it.id == id}
         }
         return null
     } */
 
-    fun getDeckList(): LiveData<List<Card>> {
+    fun getDeckList(): LiveData<ArrayDeque<Card>> {
         return deckLiveData
     }
 
     companion object {
         private var INSTANCE: DeckDataSource? = null
 
-        fun getDeckDataSource(deck: List<Card>): DeckDataSource {
+        fun getDeckDataSource(deck: ArrayDeque<Card>): DeckDataSource {
             return synchronized(DeckDataSource::class) {
                 val newInstance = INSTANCE ?: DeckDataSource(deck)
                 INSTANCE = newInstance
