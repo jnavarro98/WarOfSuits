@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="et_title" parent="@android:style/Widget.TextView">
+        <item name="android:background">@color/background_color</item>
+        <item name="android:fontFamily">@font/coco_gothic</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="et_subtitle" parent="@android:style/Widget.TextView">
+        <item name="android:background">@color/background_color</item>
+        <item name="android:fontFamily">@font/coco_gothic_light</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+</resources>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.welcome.WelcomeActivity">
+
+<!--The advantage of this layout is that it can be customized easily with-->
+<!--the android design tool since you can move guidelines as you want.-->
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_war_of_suits"
+        app:layout_constraintStart_toStartOf="@id/guideline_margin_left_icon"
+        app:layout_constraintEnd_toEndOf="@id/guideline_margin_right_icon"
+        app:layout_constraintTop_toTopOf="@id/guideline_top"
+        app:layout_constraintBottom_toTopOf="@id/separator_logo_title"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/et_title"
+        android:gravity="center"
+        android:text="@string/title_app_name"
+        app:layout_constraintStart_toStartOf="@id/guideline_margin_left_scroll"
+        app:layout_constraintEnd_toEndOf="@id/guideline_margin_right_scroll"
+        app:layout_constraintTop_toTopOf="@id/separator_logo_title"
+        app:layout_constraintBottom_toTopOf="@id/separator_title_subtitle" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        style="@style/et_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center|top"
+        android:text="@string/subtitle"
+        app:layout_constraintBottom_toTopOf="@id/separator_subtitle_scroll"
+        app:layout_constraintEnd_toEndOf="@id/guideline_margin_right_scroll"
+        app:layout_constraintStart_toStartOf="@id/guideline_margin_left_scroll"
+        app:layout_constraintTop_toTopOf="@id/separator_title_subtitle" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_margin_right_scroll"
+        app:layout_constraintStart_toStartOf="@id/guideline_margin_left_scroll"
+        app:layout_constraintTop_toBottomOf="@id/separator_subtitle_scroll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_icon_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/separator_logo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.28" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_margin_left_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_margin_right_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_margin_left_scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_margin_right_scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/separator_title_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/separator_subtitle_scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
