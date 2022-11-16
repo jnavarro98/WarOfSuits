@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">War of Suits</string>
-    <string name="subtitle"><u>El mejor juego de cartas jamas creado</u></string>
-    <string name="play">Jugar</string>
+    <string name="app_name">Guerra de Cartas</string>
+    <string name="subtitle"><u>Con amor para Wallapop</u></string>
+    <string name="play">Nueva partida</string>
+    <string name="title_winner">FELICIDADES!!</string>
+    <string name="bt_finish_game">TERMINAR PARTIDA</string>
+    <string name="title_p1_turn">Turno para el J1</string>
+    <string name="ok_caps">VALE</string>
+    <string name="subtitle_cureent_points">Ahora tiene %1d puntos</string>
+    <string name="title_p2_turn">Turno para el J2</string>
+    <string name="p1_win_message">HA GANADO J1</string>
+    <string name="p2_win_message">HA GANADO J2</string>
+    <string name="bt_draw_card">Robar carta</string>
 </resources>

@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.janavarro.war_of_suits.data.DecksDataSource
-import com.janavarro.war_of_suits.model.Card
-import com.janavarro.war_of_suits.model.Decks
-import com.janavarro.war_of_suits.utils.*
+import com.janavarro.war_of_suits.utils.generateDecks
 
 class GameViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
@@ -21,22 +19,4 @@ class GameViewModelFactory(private val context: Context) : ViewModelProvider.Fac
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-
-    private fun generateDecks(): Decks {
-        val deck = mutableListOf<Card>()
-        val priorities = getSuitPriority()
-        PokerValue.values().forEach { value ->
-            deck.add(Card(value, Hearts(priorities[0])))
-            deck.add(Card(value, Clubs(priorities[1])))
-            deck.add(Card(value, Spades(priorities[2])))
-            deck.add(Card(value, Diamonds(priorities[3])))
-        }
-        val decks = deck.shuffled().chunked(26)
-        return Decks(
-            ArrayDeque(decks[0]),
-            ArrayDeque(decks[1])
-        )
-    }
-
-    private fun getSuitPriority() = listOf(0, 1, 2, 3).shuffled()
 }

@@ -4,6 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/bt_exit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="35dp"
+        android:background="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/separator_top_card_p1"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toEndOf="@id/separator_left_current_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/separator_top_card_p2" />
+
+    <Button
+        android:id="@+id/bt_restart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="35dp"
+        android:background="@drawable/ic_reset"
+        app:layout_constraintBottom_toBottomOf="@id/separator_top_card_p1"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/separator_right_current_card"
+        app:layout_constraintTop_toTopOf="@id/separator_top_card_p2" />
+
+
     <FrameLayout
         android:id="@+id/card_container_p2"
         android:layout_width="0dp"
@@ -11,7 +36,7 @@
         android:layout_margin="10dp"
         android:scaleX="-1"
         android:scaleY="-1"
-        app:layout_constraintBottom_toBottomOf="@id/separator_middle"
+        app:layout_constraintBottom_toBottomOf="@id/separator_top_card_p2"
         app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
         app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
         app:layout_constraintTop_toTopOf="@id/separator_button_card_p2" />
@@ -24,8 +49,35 @@
         app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p1"
         app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
         app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
-        app:layout_constraintTop_toTopOf="@id/separator_middle" />
+        app:layout_constraintTop_toTopOf="@id/separator_top_card_p1" />
 
+    <TextView
+        android:id="@+id/score_p1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:fontFamily="@font/vonique_64_bold"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="@dimen/score_number_size"
+        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/separator_top_card_p1" />
+
+    <TextView
+        android:id="@+id/score_p2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/vonique_64_bold"
+        android:scaleX="-1"
+        android:scaleY="-1"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="@dimen/score_number_size"
+        app:layout_constraintBottom_toBottomOf="@id/separator_top_card_p2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/separator_button_card_p2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/separator_button_card_p2"
@@ -35,11 +87,18 @@
         app:layout_constraintGuide_percent="0.10" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/separator_middle"
+        android:id="@+id/separator_top_card_p1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.60" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/separator_top_card_p2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.40" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/separator_button_card_p1"
@@ -53,14 +112,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.30" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/separator_right_current_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/separator_start_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/separator_end_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.80" />
 
     <com.janavarro.war_of_suits.components.iconButton.IconButtonView
         android:id="@+id/bt_draw_card_p2"
@@ -70,10 +143,11 @@
         android:scaleX="-1"
         android:scaleY="-1"
         app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p2"
-        app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
-        app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
+        app:icon="@drawable/ic_war_of_suits"
+        app:layout_constraintEnd_toEndOf="@id/separator_end_buttons"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Draw card" />
+        app:layout_constraintStart_toStartOf="@id/separator_start_buttons"
+        app:title="@string/bt_draw_card" />
 
     <com.janavarro.war_of_suits.components.iconButton.IconButtonView
         android:id="@+id/bt_draw_card_p1"
@@ -81,10 +155,11 @@
         android:layout_height="0dp"
         android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
-        app:layout_constraintStart_toStartOf="@id/separator_left_current_card"
+        app:icon="@drawable/ic_war_of_suits"
+        app:layout_constraintEnd_toEndOf="@id/separator_end_buttons"
         app:layout_constraintTop_toTopOf="@id/separator_button_card_p1"
-        app:title="Draw card" />
+        app:layout_constraintStart_toStartOf="@id/separator_start_buttons"
+        app:title="@string/bt_draw_card" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

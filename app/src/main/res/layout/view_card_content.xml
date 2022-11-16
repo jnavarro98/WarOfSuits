@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="3"
-    android:rowCount="3">
+    android:adjustViewBounds="true"
+    android:rowCount="3"
+    android:scaleType="fitCenter">
 
     <ImageView
         android:id="@+id/iv_0_0"
@@ -15,11 +17,8 @@
         android:layout_rowWeight="1"
         android:layout_column="0"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -30,11 +29,8 @@
         android:layout_rowWeight="1"
         android:layout_column="1"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -45,11 +41,8 @@
         android:layout_rowWeight="1"
         android:layout_column="2"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -60,11 +53,8 @@
         android:layout_rowWeight="1"
         android:layout_column="0"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -76,7 +66,7 @@
         android:layout_column="1"
         android:layout_columnWeight="1"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -87,11 +77,8 @@
         android:layout_rowWeight="1"
         android:layout_column="2"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -102,11 +89,10 @@
         android:layout_rowWeight="1"
         android:layout_column="0"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        android:scaleX="-1"
+        android:scaleY="-1"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -117,11 +103,10 @@
         android:layout_rowWeight="1"
         android:layout_column="1"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        android:scaleX="-1"
+        android:scaleY="-1"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
     <ImageView
@@ -132,27 +117,10 @@
         android:layout_rowWeight="1"
         android:layout_column="2"
         android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
         android:visibility="gone"
-        tools:src="@drawable/ic_heart"
+        android:scaleX="-1"
+        android:scaleY="-1"
+        tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_rowWeight="1"
-        android:layout_column="0"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
-        android:visibility="gone"
-        tools:src="@drawable/ic_heart"
-        tools:visibility="visible" />
-
 
 </GridLayout>

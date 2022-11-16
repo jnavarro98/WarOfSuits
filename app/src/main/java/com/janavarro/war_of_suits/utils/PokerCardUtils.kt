@@ -1,17 +1,15 @@
 package com.janavarro.war_of_suits.utils
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
 import androidx.annotation.DrawableRes
 import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.model.Card
+import com.janavarro.war_of_suits.model.Decks
 
 sealed class Suit(@DrawableRes val image: Int, open val score: Int = -1)
-class Diamonds(override val score: Int = -1) : Suit(R.drawable.ic_diamond, score)
-class Clubs(override val score: Int = -1) : Suit(R.drawable.ic_club, score)
-class Hearts(override val score: Int = -1) : Suit(R.drawable.ic_heart, score)
-class Spades(override val score: Int = -1) : Suit(R.drawable.ic_spade, score)
+class Diamonds(override val score: Int = -1) : Suit(R.drawable.ic_diamonds, score)
+class Clubs(override val score: Int = -1) : Suit(R.drawable.ic_clubs, score)
+class Hearts(override val score: Int = -1) : Suit(R.drawable.ic_hearts, score)
+class Spades(override val score: Int = -1) : Suit(R.drawable.ic_spades, score)
 object EmptySuit : Suit(-1, -1)
 
 enum class PokerValue(val score: Int, val symbol: String) {
@@ -30,24 +28,6 @@ enum class PokerValue(val score: Int, val symbol: String) {
     A(12, "A")
 }
 
-class PokerCardUtils {
-
-
-    fun textAsBitmap(text: String, textSize: Float, textColor: Int): Bitmap? {
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint.textSize = textSize
-        paint.color = textColor
-        paint.textAlign = Paint.Align.LEFT
-        val baseline: Float = -paint.ascent() // ascent() is negative
-        val width = (paint.measureText(text) + 0.5f) // round
-        val height = (baseline + paint.descent() + 0.5f)
-        val image = Bitmap.createBitmap(width.toInt(), height.toInt(), Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(image)
-        canvas.drawText(text, 0F, baseline, paint)
-        return image
-    }
-}
-
 fun Card.compareTo(card2: Card): Int {
     val result = this.pokerValue.score.compareTo(card2.pokerValue.score)
     return if (result == 0) {
@@ -56,3 +36,21 @@ fun Card.compareTo(card2: Card): Int {
         result
     }
 }
+
+fun generateDecks(): Decks {
+    val deck = mutableListOf<Card>()
+    val priorities = getSuitPriority()
+    PokerValue.values().forEach { value ->
+        deck.add(Card(value, Hearts(priorities[0])))
+        deck.add(Card(value, Clubs(priorities[1])))
+        deck.add(Card(value, Spades(priorities[2])))
+        deck.add(Card(value, Diamonds(priorities[3])))
+    }
+    val decks = deck.shuffled().chunked(26)
+    return Decks(
+        ArrayDeque(decks[0]),
+        ArrayDeque(decks[1])
+    )
+}
+
+private fun getSuitPriority() = listOf(0, 1, 2, 3).shuffled()

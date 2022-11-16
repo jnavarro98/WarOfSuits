@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="@string/title_app_name"
+        android:text="@string/app_name"
         app:layout_constraintBottom_toTopOf="@id/separator_title_subtitle"
         app:layout_constraintEnd_toEndOf="@id/guideline_margin_right_scroll"
         app:layout_constraintStart_toStartOf="@id/guideline_margin_left_scroll"

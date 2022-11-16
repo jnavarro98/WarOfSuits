@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="suits_icon_size">25dp</dimen>
+    <dimen name="card_icons_size">20dp</dimen>
+    <dimen name="score_number_size">40sp</dimen>
+    <dimen name="corner_number_size">30sp</dimen>
 </resources>
