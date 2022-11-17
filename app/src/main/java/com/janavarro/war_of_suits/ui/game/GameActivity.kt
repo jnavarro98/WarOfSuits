@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.components.pokerCard.PokerCardView
 import com.janavarro.war_of_suits.databinding.ActivityGameBinding
-import com.janavarro.war_of_suits.model.Card
 import com.janavarro.war_of_suits.utils.GameCurrentState
 import com.janavarro.war_of_suits.utils.Winner
 
@@ -35,7 +34,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun initWinConditionObserver() {
-        gameActivityViewModel.gameWinner.observe(this) { gameWinner ->
+        gameActivityViewModel.gameWinnerLiveData.observe(this) { gameWinner ->
             if (gameWinner != Winner.Unset) {
                 showWinnerDialog(gameWinner)
             }
@@ -48,38 +47,38 @@ class GameActivity : AppCompatActivity() {
         when (winner) {
             Winner.Player1 -> builder.setMessage(getString(R.string.p1_win_message))
             Winner.Player2 -> builder.setMessage(getString(R.string.p2_win_message))
+            else -> throw Exception()
         }
         builder.setPositiveButton(getString(R.string.bt_finish_game)) { _, _ ->
-            finish()
             gameActivityViewModel.resetGameState()
+            finish()
         }
         builder.setOnDismissListener {
-            finish()
             gameActivityViewModel.resetGameState()
+            finish()
         }
         builder.show()
     }
 
     private fun initGameStateObserver() {
-        gameActivityViewModel.nextTurn.observe(this) { gameCurrentState ->
+        gameActivityViewModel.gameCurrentStateLiveData.observe(this) { gameCurrentState ->
             if (gameCurrentState == GameCurrentState.TurnFinished) {
                 gameActivityViewModel.finishTurn()
-            }
-            if (gameCurrentState == GameCurrentState.GameStarted) {
+            } else if (gameCurrentState == GameCurrentState.Finished) {
                 finishGame()
             }
         }
     }
 
     private fun initScoreObservers() {
-        binding.scoreP1.text = gameActivityViewModel.scoreP1.value.toString()
-        gameActivityViewModel.scoreP1.observe(this) { points ->
-            if (points > 0)
+        gameActivityViewModel.scoreP1LiveData.observe(this) { points ->
+            binding.scoreP1.text = points.toString()
+            if (points > 0 && gameActivityViewModel.gameWinnerLiveData.value == Winner.Unset)
                 showP1WinsTurnDialog(points)
         }
-        binding.scoreP2.text = gameActivityViewModel.scoreP2.value.toString()
-        gameActivityViewModel.scoreP2.observe(this) { points ->
-            if (points > 0)
+        gameActivityViewModel.scoreP2LiveData.observe(this) { points ->
+            binding.scoreP2.text = points.toString()
+            if (points > 0 && gameActivityViewModel.gameWinnerLiveData.value == Winner.Unset)
                 showP2WinsTurnDialog(points)
         }
     }
@@ -140,19 +139,17 @@ class GameActivity : AppCompatActivity() {
 
     private fun initButtons() {
         binding.btDrawCardP1.setOnClickListener {
-            var currentCard: Card? = null
-            gameActivityViewModel.gameStateLiveData.observe(this) {
-                currentCard = it.currentDeck.p1Deck.removeLastOrNull()
-            }
-            drawP1Card(currentCard)
+//            gameActivityViewModel.decksLiveData.observe(this) { decks ->
+//                currentCard = decks.p1Deck.removeLastOrNull()
+//            }
+            drawP1Card()
         }
 
         binding.btDrawCardP2.setOnClickListener {
-            var currentCard: Card? = null
-            gameActivityViewModel.gameStateLiveData.observe(this) {
-                currentCard = it.currentDeck.p2Deck.removeLastOrNull()
-            }
-            drawP2Card(currentCard)
+//            gameActivityViewModel.decksLiveData.observe(this) { decks ->
+//                currentCard = decks.p2Deck.removeLastOrNull()
+//            }
+            drawP2Card()
         }
 
         binding.btRestart.setOnClickListener {
@@ -165,9 +162,10 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun drawP1Card(drawnCard: Card?) {
+    private fun drawP1Card() {
+        val drawnCard = gameActivityViewModel.drawP1Card()
         if (drawnCard != null) {
-            gameActivityViewModel.setP1Card(drawnCard)
+            gameActivityViewModel.cardP1 = drawnCard
             val cardView = PokerCardView(this).apply {
                 suit = drawnCard.suit
                 pokerValue = drawnCard.pokerValue
@@ -182,9 +180,10 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun drawP2Card(drawnCard: Card?) {
+    private fun drawP2Card() {
+        val drawnCard = gameActivityViewModel.drawP2Card()
         if (drawnCard != null) {
-            gameActivityViewModel.setP2Card(drawnCard)
+            gameActivityViewModel.cardP2 = drawnCard
             val cardView = PokerCardView(this).apply {
                 suit = drawnCard.suit
                 pokerValue = drawnCard.pokerValue
@@ -194,7 +193,7 @@ class GameActivity : AppCompatActivity() {
             binding.btDrawCardP2.isEnabled = false
             gameActivityViewModel.checkGameState()
         } else {
-            //Game should've finished before
+            //Game finished
             throw Exception()
         }
     }

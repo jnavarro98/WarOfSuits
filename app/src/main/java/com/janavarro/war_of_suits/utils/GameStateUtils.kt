@@ -11,10 +11,10 @@ enum class Winner {
 enum class GameCurrentState {
     Playing,
     TurnFinished,
-    GameStarted
+    Finished
 }
 
-fun generateNewGame() = GameState(0, 0, generateDecks(), 0)
+fun GameState.getTotalScore() = p1Score.plus(p2Score)
 
 object GameConstants {
     const val SCORE_INCREASE = 2
