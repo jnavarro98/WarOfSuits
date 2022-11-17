@@ -142,11 +142,11 @@
         android:layout_margin="5dp"
         android:scaleX="-1"
         android:scaleY="-1"
-        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p2"
         app:icon="@drawable/ic_war_of_suits"
+        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p2"
         app:layout_constraintEnd_toEndOf="@id/separator_end_buttons"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/separator_start_buttons"
+        app:layout_constraintTop_toTopOf="parent"
         app:title="@string/bt_draw_card" />
 
     <com.janavarro.war_of_suits.components.iconButton.IconButtonView
@@ -154,11 +154,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:icon="@drawable/ic_war_of_suits"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/separator_end_buttons"
-        app:layout_constraintTop_toTopOf="@id/separator_button_card_p1"
         app:layout_constraintStart_toStartOf="@id/separator_start_buttons"
+        app:layout_constraintTop_toTopOf="@id/separator_button_card_p1"
         app:title="@string/bt_draw_card" />
 
 

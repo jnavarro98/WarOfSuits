@@ -21,21 +21,18 @@ enum class PokerValue(val score: Int, val symbol: String) {
     Seven(5, "7"),
     Eight(6, "8"),
     Nine(7, "9"),
-    Ten(8, "10"),
+    Ten(8, "X"),
     J(9, "J"),
     Q(10, "Q"),
     K(11, "K"),
     A(12, "A")
 }
 
-fun Card.compareTo(card2: Card): Int {
-    val result = this.pokerValue.score.compareTo(card2.pokerValue.score)
-    return if (result == 0) {
+fun Card.compareTo(card2: Card) =
+    if (this.pokerValue.score.compareTo(card2.pokerValue.score) != 0)
+        this.pokerValue.score.compareTo(card2.pokerValue.score)
+    else
         this.suit.score.compareTo(card2.suit.score)
-    } else {
-        result
-    }
-}
 
 fun generateDecks(): Decks {
     val deck = mutableListOf<Card>()

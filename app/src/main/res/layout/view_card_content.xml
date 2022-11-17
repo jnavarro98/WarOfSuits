@@ -4,8 +4,8 @@
     android:id="@+id/card_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="3"
     android:adjustViewBounds="true"
+    android:columnCount="3"
     android:rowCount="3"
     android:scaleType="fitCenter">
 
@@ -89,9 +89,9 @@
         android:layout_rowWeight="1"
         android:layout_column="0"
         android:layout_columnWeight="1"
-        android:visibility="gone"
         android:scaleX="-1"
         android:scaleY="-1"
+        android:visibility="gone"
         tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
@@ -103,9 +103,9 @@
         android:layout_rowWeight="1"
         android:layout_column="1"
         android:layout_columnWeight="1"
-        android:visibility="gone"
         android:scaleX="-1"
         android:scaleY="-1"
+        android:visibility="gone"
         tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 
@@ -117,9 +117,9 @@
         android:layout_rowWeight="1"
         android:layout_column="2"
         android:layout_columnWeight="1"
-        android:visibility="gone"
         android:scaleX="-1"
         android:scaleY="-1"
+        android:visibility="gone"
         tools:src="@drawable/ic_hearts"
         tools:visibility="visible" />
 

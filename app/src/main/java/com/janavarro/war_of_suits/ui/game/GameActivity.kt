@@ -9,7 +9,8 @@ import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.components.pokerCard.PokerCardView
 import com.janavarro.war_of_suits.databinding.ActivityGameBinding
 import com.janavarro.war_of_suits.model.Card
-import com.janavarro.war_of_suits.utils.Player
+import com.janavarro.war_of_suits.utils.GameCurrentState
+import com.janavarro.war_of_suits.utils.Winner
 
 
 class GameActivity : AppCompatActivity() {
@@ -28,46 +29,49 @@ class GameActivity : AppCompatActivity() {
 
     private fun initUi() {
         initButtons()
-        initScoreCounters()
-        initTurnChecker()
-        initWinConditionChecker()
+        initScoreObservers()
+        initGameStateObserver()
+        initWinConditionObserver()
     }
 
-    private fun initWinConditionChecker() {
+    private fun initWinConditionObserver() {
         gameActivityViewModel.gameWinner.observe(this) { gameWinner ->
-            if (gameWinner != Player.Unset) {
+            if (gameWinner != Winner.Unset) {
                 showWinnerDialog(gameWinner)
             }
         }
     }
 
-    private fun showWinnerDialog(winner: Player) {
+    private fun showWinnerDialog(winner: Winner) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.title_winner))
         when (winner) {
-            Player.Player1 -> builder.setMessage(getString(R.string.p1_win_message))
-            Player.Player2 -> builder.setMessage(getString(R.string.p2_win_message))
+            Winner.Player1 -> builder.setMessage(getString(R.string.p1_win_message))
+            Winner.Player2 -> builder.setMessage(getString(R.string.p2_win_message))
         }
         builder.setPositiveButton(getString(R.string.bt_finish_game)) { _, _ ->
             finish()
-            gameActivityViewModel.finishGame()
+            gameActivityViewModel.resetGameState()
         }
         builder.setOnDismissListener {
             finish()
-            gameActivityViewModel.finishGame()
+            gameActivityViewModel.resetGameState()
         }
         builder.show()
     }
 
-    private fun initTurnChecker() {
-        gameActivityViewModel.nextTurn.observe(this) { isNextTurn ->
-            if (isNextTurn) {
+    private fun initGameStateObserver() {
+        gameActivityViewModel.nextTurn.observe(this) { gameCurrentState ->
+            if (gameCurrentState == GameCurrentState.TurnFinished) {
                 gameActivityViewModel.finishTurn()
+            }
+            if (gameCurrentState == GameCurrentState.GameStarted) {
+                finishGame()
             }
         }
     }
 
-    private fun initScoreCounters() {
+    private fun initScoreObservers() {
         binding.scoreP1.text = gameActivityViewModel.scoreP1.value.toString()
         gameActivityViewModel.scoreP1.observe(this) { points ->
             if (points > 0)
@@ -125,19 +129,28 @@ class GameActivity : AppCompatActivity() {
         binding.btDrawCardP2.isEnabled = true
     }
 
+    private fun finishGame() {
+        binding.cardContainerP1.removeAllViews()
+        binding.cardContainerP2.removeAllViews()
+        binding.btDrawCardP1.isEnabled = true
+        binding.btDrawCardP2.isEnabled = true
+        binding.scoreP1.text = "0"
+        binding.scoreP2.text = "0"
+    }
+
     private fun initButtons() {
         binding.btDrawCardP1.setOnClickListener {
             var currentCard: Card? = null
-            gameActivityViewModel.decksLiveData.observe(this) {
-                currentCard = it.P1Deck.removeLastOrNull()
+            gameActivityViewModel.gameStateLiveData.observe(this) {
+                currentCard = it.currentDeck.p1Deck.removeLastOrNull()
             }
             drawP1Card(currentCard)
         }
 
         binding.btDrawCardP2.setOnClickListener {
             var currentCard: Card? = null
-            gameActivityViewModel.decksLiveData.observe(this) {
-                currentCard = it.P2Deck.removeLastOrNull()
+            gameActivityViewModel.gameStateLiveData.observe(this) {
+                currentCard = it.currentDeck.p2Deck.removeLastOrNull()
             }
             drawP2Card(currentCard)
         }
