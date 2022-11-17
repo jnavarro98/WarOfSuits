@@ -22,13 +22,23 @@ class GameViewModel(private val gameStateDataSource: GameStateDataSource) : View
         cardP1?.let { cardP1 ->
             cardP2?.let { cardP2 ->
                 if (cardP1.compareTo(cardP2) > 0) {
-                    gameStateDataSource.addP1Score()
-                    if (gameStateDataSource.totalScore == TOTAL_SCORE_TO_FINISH)
-                        gameStateDataSource.setWinner(Winner.Player1)
+                    val p1CurrentPoints = gameStateDataSource.addP1Score()
+                    if (gameStateDataSource.totalScore == TOTAL_SCORE_TO_FINISH) {
+                        if (p1CurrentPoints != TOTAL_SCORE_TO_FINISH / 2) {
+                            gameStateDataSource.setWinner(Winner.Player1)
+                        } else {
+                            gameStateDataSource.setWinner(Winner.Tie)
+                        }
+                    }
                 } else {
-                    gameStateDataSource.addP2Score()
-                    if (gameStateDataSource.totalScore == TOTAL_SCORE_TO_FINISH)
-                        gameStateDataSource.setWinner(Winner.Player2)
+                    val p2CurrentPoints = gameStateDataSource.addP2Score()
+                    if (gameStateDataSource.totalScore == TOTAL_SCORE_TO_FINISH) {
+                        if (p2CurrentPoints != TOTAL_SCORE_TO_FINISH / 2) {
+                            gameStateDataSource.setWinner(Winner.Player2)
+                        } else {
+                            gameStateDataSource.setWinner(Winner.Tie)
+                        }
+                    }
                 }
                 gameStateDataSource.setGameCurrentState(GameCurrentState.TurnFinished)
             }
@@ -38,7 +48,7 @@ class GameViewModel(private val gameStateDataSource: GameStateDataSource) : View
     fun drawP1Card() = gameStateDataSource.drawP1Card()
     fun drawP2Card() = gameStateDataSource.drawP2Card()
 
-    fun finishTurn() {
+    fun startNewTurn() {
         gameStateDataSource.setGameCurrentState(GameCurrentState.Playing)
         cardP1 = null
         cardP2 = null

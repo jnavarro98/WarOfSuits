@@ -3,7 +3,7 @@
     <string name="subtitle"><u>It is not about smokings</u></string>
     <string name="play">New game</string>
     <string name="title_app_name" translatable="false">War of Suits</string>
-    <string name="title_winner">CONGRATULATIONS!!</string>
+    <string name="title_match_result">GAME FINISHED</string>
     <string name="bt_finish_game">FINISH GAME</string>
     <string name="title_p1_turn">P1 Wins turn!</string>
     <string name="ok_caps">OK</string>
@@ -12,4 +12,5 @@
     <string name="p1_win_message">PLAYER 1 HAS WON</string>
     <string name="p2_win_message">PLAYER 2 HAS WON</string>
     <string name="bt_draw_card">Draw card</string>
+    <string name="tie_message">TIE, TRY AGAIN IN A NEW GAME!</string>
 </resources>

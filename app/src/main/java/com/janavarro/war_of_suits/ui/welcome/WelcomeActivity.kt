@@ -31,8 +31,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
-        val iconButtonAdapter =
-            IconButtonAdapter { it.launch(this) }
+        val iconButtonAdapter = IconButtonAdapter { it.launch(this) }
         binding.rvIconButtons.layoutManager = layoutManager
         binding.rvIconButtons.adapter = iconButtonAdapter
         val divider = DividerItemDecoration(this, layoutManager.orientation)

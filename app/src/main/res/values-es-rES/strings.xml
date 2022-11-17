@@ -3,7 +3,7 @@
     <string name="app_name">Guerra de Cartas</string>
     <string name="subtitle"><u>Con amor para Wallapop</u></string>
     <string name="play">Nueva partida</string>
-    <string name="title_winner">FELICIDADES!!</string>
+    <string name="title_match_result">FIN DE LA PARTIDA</string>
     <string name="bt_finish_game">TERMINAR PARTIDA</string>
     <string name="title_p1_turn">Turno para el J1</string>
     <string name="ok_caps">VALE</string>
@@ -12,4 +12,5 @@
     <string name="p1_win_message">HA GANADO J1</string>
     <string name="p2_win_message">HA GANADO J2</string>
     <string name="bt_draw_card">Robar carta</string>
+    <string name="tie_message">EMPATE, HABRA QUE ECHARSE OTRA PARTIDA!</string>
 </resources>

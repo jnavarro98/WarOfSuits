@@ -9,7 +9,7 @@ import com.janavarro.war_of_suits.utils.GameCurrentState
 import com.janavarro.war_of_suits.utils.Winner
 import com.janavarro.war_of_suits.utils.generateDecks
 
-/* Handles operations on gameState and holds details about it. */
+/* Handles operations on gameState and holds details about it.*/
 class GameStateDataSource(gameState: GameState) {
 
     private val _scoreP1 = MutableLiveData(gameState.p1Score)
@@ -26,23 +26,28 @@ class GameStateDataSource(gameState: GameState) {
     val gameCurrentState: LiveData<GameCurrentState>
         get() = _gameCurrentState
 
-    private val _decks = MutableLiveData(gameState.decks)
-    val decks: LiveData<Decks>
-        get() = _decks
+    private var decks: Decks = gameState.decks
 
     private val _gameWinner = MutableLiveData(Winner.Unset)
     val gameWinner: LiveData<Winner>
         get() = _gameWinner
 
 
-    fun addP1Score() {
+    fun addP1Score(): Int? {
         totalScore = totalScore.plus((SCORE_INCREASE))
-        _scoreP1.postValue(scoreP1.value?.plus(SCORE_INCREASE))
+        val p1Score = scoreP1.value?.plus(SCORE_INCREASE)
+        //I post the value instead of setting it because I want a little delay for race condition reasons
+        //so the winner is set before triggering the turn winner dialog
+        _scoreP1.postValue(p1Score)
+        return p1Score
     }
 
-    fun addP2Score() {
+    fun addP2Score(): Int? {
         totalScore = totalScore.plus((SCORE_INCREASE))
-        _scoreP2.postValue(scoreP2.value?.plus(SCORE_INCREASE))
+        val p2Score = scoreP2.value?.plus(SCORE_INCREASE)
+        //I post the value instead of setting it because I want a little delay for race condition reasons
+        _scoreP2.postValue(p2Score)
+        return p2Score
     }
 
     fun setGameCurrentState(newGameState: GameCurrentState) {
@@ -58,12 +63,12 @@ class GameStateDataSource(gameState: GameState) {
         _gameCurrentState.value = GameCurrentState.Finished
         _scoreP1.value = 0
         _scoreP2.value = 0
-        _decks.value = generateDecks()
+        decks = generateDecks()
         totalScore = 0
     }
 
-    fun drawP1Card() = decks.value?.p1Deck?.removeLastOrNull()
-    fun drawP2Card() = decks.value?.p2Deck?.removeLastOrNull()
+    fun drawP1Card() = decks.p1Deck.removeLastOrNull()
+    fun drawP2Card() = decks.p2Deck.removeLastOrNull()
 
     companion object {
         private var INSTANCE: GameStateDataSource? = null

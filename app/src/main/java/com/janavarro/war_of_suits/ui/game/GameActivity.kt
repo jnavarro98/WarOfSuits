@@ -36,17 +36,61 @@ class GameActivity : AppCompatActivity() {
     private fun initWinConditionObserver() {
         gameActivityViewModel.gameWinnerLiveData.observe(this) { gameWinner ->
             if (gameWinner != Winner.Unset) {
-                showWinnerDialog(gameWinner)
+                showMatchFinishedDialog(gameWinner)
             }
         }
     }
 
-    private fun showWinnerDialog(winner: Winner) {
+    private fun initGameStateObserver() {
+        gameActivityViewModel.gameCurrentStateLiveData.observe(this) { gameCurrentState ->
+            if (gameCurrentState == GameCurrentState.TurnFinished) {
+                gameActivityViewModel.startNewTurn()
+            } else if (gameCurrentState == GameCurrentState.Finished) {
+                finishGame()
+            }
+        }
+    }
+
+    private fun initScoreObservers() {
+        gameActivityViewModel.scoreP1LiveData.observe(this) { points ->
+            binding.scoreP1.text = points.toString()
+            if (points > 0 && gameActivityViewModel.gameWinnerLiveData.value == Winner.Unset)
+                showPlayerWinsTurnDialog(points, getString(R.string.title_p1_turn))
+        }
+        gameActivityViewModel.scoreP2LiveData.observe(this) { points ->
+            binding.scoreP2.text = points.toString()
+            if (points > 0 && gameActivityViewModel.gameWinnerLiveData.value == Winner.Unset)
+                showPlayerWinsTurnDialog(points, getString(R.string.title_p2_turn))
+        }
+    }
+
+
+    private fun initButtons() {
+        binding.btDrawCardP1.setOnClickListener {
+            drawP1Card()
+        }
+
+        binding.btDrawCardP2.setOnClickListener {
+            drawP2Card()
+        }
+
+        binding.btRestart.setOnClickListener {
+            gameActivityViewModel.resetGameState()
+        }
+
+        binding.btExit.setOnClickListener {
+            gameActivityViewModel.resetGameState()
+            finish()
+        }
+    }
+
+    private fun showMatchFinishedDialog(winner: Winner) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.title_winner))
+        builder.setTitle(getString(R.string.title_match_result))
         when (winner) {
             Winner.Player1 -> builder.setMessage(getString(R.string.p1_win_message))
             Winner.Player2 -> builder.setMessage(getString(R.string.p2_win_message))
+            Winner.Tie -> builder.setMessage(getString(R.string.tie_message))
             else -> throw Exception()
         }
         builder.setPositiveButton(getString(R.string.bt_finish_game)) { _, _ ->
@@ -60,106 +104,19 @@ class GameActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun initGameStateObserver() {
-        gameActivityViewModel.gameCurrentStateLiveData.observe(this) { gameCurrentState ->
-            if (gameCurrentState == GameCurrentState.TurnFinished) {
-                gameActivityViewModel.finishTurn()
-            } else if (gameCurrentState == GameCurrentState.Finished) {
-                finishGame()
-            }
-        }
-    }
-
-    private fun initScoreObservers() {
-        gameActivityViewModel.scoreP1LiveData.observe(this) { points ->
-            binding.scoreP1.text = points.toString()
-            if (points > 0 && gameActivityViewModel.gameWinnerLiveData.value == Winner.Unset)
-                showP1WinsTurnDialog(points)
-        }
-        gameActivityViewModel.scoreP2LiveData.observe(this) { points ->
-            binding.scoreP2.text = points.toString()
-            if (points > 0 && gameActivityViewModel.gameWinnerLiveData.value == Winner.Unset)
-                showP2WinsTurnDialog(points)
-        }
-    }
-
-    private fun showP1WinsTurnDialog(currentPoints: Int) {
+    private fun showPlayerWinsTurnDialog(currentPoints: Int, title: String) {
         binding.scoreP1.text = currentPoints.toString()
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.title_p1_turn))
+        builder.setTitle(title)
         builder.setMessage(
             String.format(
                 getString(R.string.subtitle_cureent_points),
                 currentPoints
             )
         )
-        builder.setPositiveButton(getString(R.string.ok_caps)) { _, _ ->
-            finishTurn()
-        }
-        builder.setOnDismissListener {
-            finishTurn()
-        }
+        builder.setPositiveButton(getString(R.string.ok_caps)) { _, _ -> finishTurn() }
+        builder.setOnDismissListener { finishTurn() }
         builder.show()
-    }
-
-    private fun showP2WinsTurnDialog(currentPoints: Int) {
-        binding.scoreP2.text = currentPoints.toString()
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.title_p2_turn))
-        builder.setMessage(
-            String.format(
-                getString(R.string.subtitle_cureent_points),
-                currentPoints
-            )
-        )
-        builder.setPositiveButton(getString(R.string.ok_caps)) { _, _ ->
-            finishTurn()
-        }
-        builder.setOnDismissListener {
-            finishTurn()
-        }
-        builder.show()
-    }
-
-    private fun finishTurn() {
-        binding.cardContainerP1.removeAllViews()
-        binding.cardContainerP2.removeAllViews()
-        binding.btDrawCardP1.isEnabled = true
-        binding.btDrawCardP2.isEnabled = true
-    }
-
-    private fun finishGame() {
-        binding.cardContainerP1.removeAllViews()
-        binding.cardContainerP2.removeAllViews()
-        binding.btDrawCardP1.isEnabled = true
-        binding.btDrawCardP2.isEnabled = true
-        binding.scoreP1.text = "0"
-        binding.scoreP2.text = "0"
-    }
-
-    private fun initButtons() {
-        binding.btDrawCardP1.setOnClickListener {
-//            gameActivityViewModel.decksLiveData.observe(this) { decks ->
-//                currentCard = decks.p1Deck.removeLastOrNull()
-//            }
-            drawP1Card()
-        }
-
-        binding.btDrawCardP2.setOnClickListener {
-//            gameActivityViewModel.decksLiveData.observe(this) { decks ->
-//                currentCard = decks.p2Deck.removeLastOrNull()
-//            }
-            drawP2Card()
-        }
-
-        binding.btRestart.setOnClickListener {
-            gameActivityViewModel.resetGameState()
-        }
-
-        binding.btExit.setOnClickListener {
-            gameActivityViewModel.resetGameState()
-            finish()
-        }
     }
 
     private fun drawP1Card() {
@@ -175,7 +132,6 @@ class GameActivity : AppCompatActivity() {
             binding.btDrawCardP1.isEnabled = false
             gameActivityViewModel.checkGameState()
         } else {
-            //Game finished
             throw Exception()
         }
     }
@@ -198,6 +154,22 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {  /*Block user back button, there's UI for this*/
+    private fun finishTurn() {
+        binding.cardContainerP1.removeAllViews()
+        binding.cardContainerP2.removeAllViews()
+        binding.btDrawCardP1.isEnabled = true
+        binding.btDrawCardP2.isEnabled = true
+    }
+
+    private fun finishGame() {
+        binding.cardContainerP1.removeAllViews()
+        binding.cardContainerP2.removeAllViews()
+        binding.btDrawCardP1.isEnabled = true
+        binding.btDrawCardP2.isEnabled = true
+        binding.scoreP1.text = "0"
+        binding.scoreP2.text = "0"
+    }
+
+    override fun onBackPressed() {  /*Blocks user back button, there's UI for this*/
     }
 }

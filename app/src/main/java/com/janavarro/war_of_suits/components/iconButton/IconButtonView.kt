@@ -26,7 +26,7 @@ class IconButtonView @JvmOverloads constructor(
             attributes.getString(R.styleable.IconButtonView_title)?.let {
                 title = it
             }
-            attributes.getResourceId(R.styleable.IconButtonView_icon, 0)?.let {
+            attributes.getResourceId(R.styleable.IconButtonView_icon, 0).let {
                 icon = it
             }
         } finally {

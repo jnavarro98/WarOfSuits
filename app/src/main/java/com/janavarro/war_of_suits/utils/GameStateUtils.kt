@@ -5,6 +5,7 @@ import com.janavarro.war_of_suits.model.GameState
 enum class Winner {
     Player1,
     Player2,
+    Tie,
     Unset
 }
 
