@@ -20,8 +20,6 @@ class GameStateDataSource(gameState: GameState) {
     val scoreP2: LiveData<Int>
         get() = _scoreP2
 
-    var totalScore = 0
-
     private val _gameCurrentState = MutableLiveData(gameState.gameCurrentState)
     val gameCurrentState: LiveData<GameCurrentState>
         get() = _gameCurrentState
@@ -32,9 +30,11 @@ class GameStateDataSource(gameState: GameState) {
     val gameWinner: LiveData<Winner>
         get() = _gameWinner
 
+    var totalScore = 0
+        private set
 
     fun addP1Score(): Int? {
-        totalScore = totalScore.plus((SCORE_INCREASE))
+        totalScore = totalScore.plus(SCORE_INCREASE)
         val p1Score = scoreP1.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
         //so the winner is set before triggering the turn winner dialog
@@ -43,9 +43,10 @@ class GameStateDataSource(gameState: GameState) {
     }
 
     fun addP2Score(): Int? {
-        totalScore = totalScore.plus((SCORE_INCREASE))
+        totalScore = totalScore.plus(SCORE_INCREASE)
         val p2Score = scoreP2.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
+        //so the winner is set before triggering the turn winner dialog
         _scoreP2.postValue(p2Score)
         return p2Score
     }

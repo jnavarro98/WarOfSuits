@@ -105,7 +105,6 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun showPlayerWinsTurnDialog(currentPoints: Int, title: String) {
-        binding.scoreP1.text = currentPoints.toString()
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)
         builder.setMessage(

@@ -55,9 +55,21 @@ class GameStateDataSourceTest {
     fun gameIsReset() {
         gameStateDataSource = GameStateDataSource(
             GameState(
-                12, 22, GameCurrentState.Playing, generateDecks()
+                12, 22, GameCurrentState.Playing, generateDecks(), Winner.Player2
             )
         )
-        Assert.assertEquals(gameStateDataSource.gameWinner.value, Winner.Player1)
+        gameStateDataSource.resetGameState()
+        Assert.assertEquals(gameStateDataSource.gameWinner.value, Winner.Unset)
+        Assert.assertEquals(gameStateDataSource.gameCurrentState.value, GameCurrentState.Finished)
+        Assert.assertEquals(gameStateDataSource.scoreP1.value, 0)
+        Assert.assertEquals(gameStateDataSource.scoreP2.value, 0)
+    }
+
+    @Test
+    fun draw27thCardIsNull() {
+        repeat(26) { Assert.assertNotNull(gameStateDataSource.drawP1Card()) }
+        repeat(26) { Assert.assertNotNull(gameStateDataSource.drawP2Card()) }
+        Assert.assertNull(gameStateDataSource.drawP1Card())
+        Assert.assertNull(gameStateDataSource.drawP2Card())
     }
 }
