@@ -2,6 +2,7 @@ package com.janavarro.war_of_suits.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.janavarro.war_of_suits.model.Card
 import com.janavarro.war_of_suits.model.Decks
 import com.janavarro.war_of_suits.model.GameState
 import com.janavarro.war_of_suits.utils.GameConstants.SCORE_INCREASE
@@ -30,25 +31,26 @@ class GameStateDataSource(gameState: GameState) {
     val gameWinner: LiveData<Winner>
         get() = _gameWinner
 
-    var totalScore = 0
+    var totalScore = gameState.totalScore
         private set
 
-    fun addP1Score(): Int? {
+    var cardP1: Card? = gameState.cardP1
+    var cardP2: Card? = gameState.cardP2
+
+    fun addP1Score() {
         totalScore = totalScore.plus(SCORE_INCREASE)
         val p1Score = scoreP1.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
         //so the winner is set before triggering the turn winner dialog
         _scoreP1.postValue(p1Score)
-        return p1Score
     }
 
-    fun addP2Score(): Int? {
+    fun addP2Score() {
         totalScore = totalScore.plus(SCORE_INCREASE)
         val p2Score = scoreP2.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
         //so the winner is set before triggering the turn winner dialog
         _scoreP2.postValue(p2Score)
-        return p2Score
     }
 
     fun setGameCurrentState(newGameState: GameCurrentState) {
@@ -66,10 +68,21 @@ class GameStateDataSource(gameState: GameState) {
         _scoreP2.value = 0
         decks = generateDecks()
         totalScore = 0
+        cardP1 = null
+        cardP2 = null
     }
 
-    fun drawP1Card() = decks.p1Deck.removeLastOrNull()
-    fun drawP2Card() = decks.p2Deck.removeLastOrNull()
+    fun drawP1Card(): Card? {
+        val drawnCard = decks.p1Deck.removeLastOrNull()
+        cardP1 = drawnCard
+        return cardP1
+    }
+
+    fun drawP2Card(): Card? {
+        val drawnCard = decks.p2Deck.removeLastOrNull()
+        cardP2 = drawnCard
+        return cardP2
+    }
 
     companion object {
         private var INSTANCE: GameStateDataSource? = null

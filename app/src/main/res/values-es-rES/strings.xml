@@ -13,4 +13,6 @@
     <string name="p2_win_message">HA GANADO J2</string>
     <string name="bt_draw_card">Robar carta</string>
     <string name="tie_message">EMPATE, HABRA QUE ECHARSE OTRA PARTIDA!</string>
+    <string name="p1_label">J1</string>
+    <string name="p2_label">J2</string>
 </resources>

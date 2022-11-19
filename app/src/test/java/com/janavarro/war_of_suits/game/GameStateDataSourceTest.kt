@@ -1,4 +1,4 @@
-package com.janavarro.war_of_suits
+package com.janavarro.war_of_suits.game
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.janavarro.war_of_suits.data.GameStateDataSource

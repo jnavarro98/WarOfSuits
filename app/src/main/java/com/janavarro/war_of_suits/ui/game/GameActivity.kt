@@ -94,14 +94,17 @@ class GameActivity : AppCompatActivity() {
             else -> throw Exception()
         }
         builder.setPositiveButton(getString(R.string.bt_finish_game)) { _, _ ->
-            gameActivityViewModel.resetGameState()
-            finish()
+            exitGame()
         }
         builder.setOnDismissListener {
-            gameActivityViewModel.resetGameState()
-            finish()
+            exitGame()
         }
         builder.show()
+    }
+
+    private fun exitGame() {
+        gameActivityViewModel.resetGameState()
+        finish()
     }
 
     private fun showPlayerWinsTurnDialog(currentPoints: Int, title: String) {
@@ -121,7 +124,6 @@ class GameActivity : AppCompatActivity() {
     private fun drawP1Card() {
         val drawnCard = gameActivityViewModel.drawP1Card()
         if (drawnCard != null) {
-            gameActivityViewModel.cardP1 = drawnCard
             val cardView = PokerCardView(this).apply {
                 suit = drawnCard.suit
                 pokerValue = drawnCard.pokerValue
@@ -129,7 +131,6 @@ class GameActivity : AppCompatActivity() {
             binding.cardContainerP1.removeAllViews()
             binding.cardContainerP1.addView(cardView)
             binding.btDrawCardP1.isEnabled = false
-            gameActivityViewModel.checkGameState()
         } else {
             throw Exception()
         }
@@ -138,7 +139,6 @@ class GameActivity : AppCompatActivity() {
     private fun drawP2Card() {
         val drawnCard = gameActivityViewModel.drawP2Card()
         if (drawnCard != null) {
-            gameActivityViewModel.cardP2 = drawnCard
             val cardView = PokerCardView(this).apply {
                 suit = drawnCard.suit
                 pokerValue = drawnCard.pokerValue
@@ -146,7 +146,6 @@ class GameActivity : AppCompatActivity() {
             binding.cardContainerP2.removeAllViews()
             binding.cardContainerP2.addView(cardView)
             binding.btDrawCardP2.isEnabled = false
-            gameActivityViewModel.checkGameState()
         } else {
             //Game finished
             throw Exception()
@@ -169,6 +168,5 @@ class GameActivity : AppCompatActivity() {
         binding.scoreP2.text = "0"
     }
 
-    override fun onBackPressed() {  /*Blocks user back button, there's UI for this*/
-    }
+    override fun onBackPressed() {  /*Blocks user back button, there's UI for this*/ }
 }

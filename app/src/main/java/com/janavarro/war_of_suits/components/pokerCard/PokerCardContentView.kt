@@ -12,6 +12,10 @@ import com.janavarro.war_of_suits.utils.EmptySuit
 import com.janavarro.war_of_suits.utils.PokerValue
 import com.janavarro.war_of_suits.utils.Suit
 
+/*
+* This component is designed to automatically draw the content of a poker card
+* once you pass the Card object values
+* */
 class PokerCardContentView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null

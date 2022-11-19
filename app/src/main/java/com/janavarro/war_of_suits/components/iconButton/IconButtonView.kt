@@ -7,6 +7,10 @@ import android.widget.LinearLayout
 import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.databinding.ViewIconButtonBinding
 
+/*
+* This component has custom attributes so it can be designed in XML
+* or programmatically with ease
+* */
 class IconButtonView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null

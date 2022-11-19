@@ -13,4 +13,6 @@
     <string name="p2_win_message">PLAYER 2 HAS WON</string>
     <string name="bt_draw_card">Draw card</string>
     <string name="tie_message">TIE, TRY AGAIN IN A NEW GAME!</string>
+    <string name="p1_label">P1</string>
+    <string name="p2_label">P2</string>
 </resources>

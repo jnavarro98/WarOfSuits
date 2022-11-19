@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.janavarro.war_of_suits.data.GameStateDataSource
 import com.janavarro.war_of_suits.model.GameState
 
+//TODO: In the future, we can use context to get saved preferences of a saved game
 class GameViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
-
+    //Standard VM Factory implementation
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GameViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

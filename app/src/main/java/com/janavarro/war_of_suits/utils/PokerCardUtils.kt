@@ -5,6 +5,7 @@ import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.model.Card
 import com.janavarro.war_of_suits.model.Decks
 
+//Sealed classes allow me to instantiate suits with different scores but fixed icons.
 sealed class Suit(@DrawableRes val image: Int, open val score: Int = -1)
 class Diamonds(override val score: Int = -1) : Suit(R.drawable.ic_diamonds, score)
 class Clubs(override val score: Int = -1) : Suit(R.drawable.ic_clubs, score)
@@ -34,6 +35,8 @@ fun Card.compareTo(card2: Card) =
     else
         this.suit.score.compareTo(card2.suit.score)
 
+//Kotlin lists make this process straightforward
+//I used array deque since it simulates the behaviour of a card deck
 fun generateDecks(): Decks {
     val deck = mutableListOf<Card>()
     val priorities = getSuitPriority()

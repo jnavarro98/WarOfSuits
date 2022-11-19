@@ -11,7 +11,7 @@ import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.components.adapters.IconButtonAdapter
 import com.janavarro.war_of_suits.databinding.ActivityWelcomeBinding
 import com.janavarro.war_of_suits.model.IconButton
-import com.janavarro.war_of_suits.utils.launch
+import com.janavarro.war_of_suits.model.launch
 
 
 class WelcomeActivity : AppCompatActivity() {
