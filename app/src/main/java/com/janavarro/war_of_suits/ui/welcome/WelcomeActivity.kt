@@ -21,6 +21,7 @@ class WelcomeActivity : AppCompatActivity() {
         WelcomeViewModelFactory(this)
     }
     private val layoutManager = LinearLayoutManager(this)
+    private lateinit var iconButtonAdapter : IconButtonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +29,19 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initUi()
+        initObservers()
     }
 
     private fun initUi() {
-        val iconButtonAdapter = IconButtonAdapter { it.launch(this) }
+        iconButtonAdapter = IconButtonAdapter { it.launch(this) }
         binding.rvIconButtons.layoutManager = layoutManager
         binding.rvIconButtons.adapter = iconButtonAdapter
         val divider = DividerItemDecoration(this, layoutManager.orientation)
         AppCompatResources.getDrawable(this, R.drawable.divider_rv)?.let { divider.setDrawable(it) }
         binding.rvIconButtons.addItemDecoration(divider)
+    }
+
+    private fun initObservers() {
         welcomeActivityViewModel.iconButtonLiveData.observe(this) {
             it?.let {
                 iconButtonAdapter.submitList(it as MutableList<IconButton>)

@@ -149,13 +149,7 @@ class PokerCardContentView @JvmOverloads constructor(
                 binding.iv00.visibility = VISIBLE
                 binding.iv00.setImageResource(suit.image)
                 binding.iv11.visibility = VISIBLE
-                binding.iv11.setImageBitmap(
-                    DrawUtils().textAsBitmap(
-                        PokerValue.Ten.symbol,
-                        ROYAL_CARDS_SYMBOL_SIZE,
-                        context.getColor(R.color.black)
-                    )
-                )
+                binding.iv11.setImageResource(R.drawable.ic_10)
                 binding.iv22.visibility = VISIBLE
                 binding.iv22.setImageResource(suit.image)
             }
@@ -179,13 +173,7 @@ class PokerCardContentView @JvmOverloads constructor(
                 binding.iv00.visibility = VISIBLE
                 binding.iv00.setImageResource(suit.image)
                 binding.iv11.visibility = VISIBLE
-                binding.iv11.setImageBitmap(
-                    DrawUtils().textAsBitmap(
-                        PokerValue.Q.symbol,
-                        ROYAL_CARDS_SYMBOL_SIZE,
-                        context.getColor(R.color.black)
-                    )
-                )
+                binding.iv11.setImageResource(R.drawable.ic_queen)
                 binding.iv22.visibility = VISIBLE
                 binding.iv22.setImageResource(suit.image)
             }
@@ -194,13 +182,7 @@ class PokerCardContentView @JvmOverloads constructor(
                 binding.iv00.visibility = VISIBLE
                 binding.iv00.setImageResource(suit.image)
                 binding.iv11.visibility = VISIBLE
-                binding.iv11.setImageBitmap(
-                    DrawUtils().textAsBitmap(
-                        PokerValue.K.symbol,
-                        ROYAL_CARDS_SYMBOL_SIZE,
-                        context.getColor(R.color.black)
-                    )
-                )
+                binding.iv11.setImageResource(R.drawable.ic_king)
                 binding.iv22.visibility = VISIBLE
                 binding.iv22.setImageResource(suit.image)
             }

@@ -2,6 +2,7 @@ package com.janavarro.war_of_suits.ui.game
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -24,15 +25,20 @@ class GameActivity : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
         initUi()
+        initObservers()
     }
 
     private fun initUi() {
         initButtons()
         initScoreObservers()
+    }
+
+    private fun initObservers() {
         initGameStateObserver()
         initWinConditionObserver()
     }
 
+    //Gets notified when the win condition is met
     private fun initWinConditionObserver() {
         gameActivityViewModel.gameWinnerLiveData.observe(this) { gameWinner ->
             if (gameWinner != Winner.Unset) {
@@ -41,6 +47,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
+    //Get's notified each time the game state changes
     private fun initGameStateObserver() {
         gameActivityViewModel.gameCurrentStateLiveData.observe(this) { gameCurrentState ->
             if (gameCurrentState == GameCurrentState.TurnFinished) {
@@ -51,6 +58,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
+    //Gets notified each time the any player score is changed
     private fun initScoreObservers() {
         gameActivityViewModel.scoreP1LiveData.observe(this) { points ->
             binding.scoreP1.text = points.toString()
@@ -118,7 +126,7 @@ class GameActivity : AppCompatActivity() {
         )
         builder.setPositiveButton(getString(R.string.ok_caps)) { _, _ -> finishTurn() }
         builder.setOnDismissListener { finishTurn() }
-        builder.show()
+        builder.show().window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
     }
 
     private fun drawP1Card() {
@@ -132,7 +140,8 @@ class GameActivity : AppCompatActivity() {
             binding.cardContainerP1.addView(cardView)
             binding.btDrawCardP1.isEnabled = false
         } else {
-            throw Exception()
+            //Game finished
+            throw Exception("The game should've finished by this moment")
         }
     }
 
@@ -148,7 +157,7 @@ class GameActivity : AppCompatActivity() {
             binding.btDrawCardP2.isEnabled = false
         } else {
             //Game finished
-            throw Exception()
+            throw Exception("The game should've finished by this moment")
         }
     }
 
@@ -160,10 +169,11 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun finishGame() {
-        binding.cardContainerP1.removeAllViews()
-        binding.cardContainerP2.removeAllViews()
-        binding.btDrawCardP1.isEnabled = true
-        binding.btDrawCardP2.isEnabled = true
+        finishTurn()
+        resetScore()
+    }
+
+    private fun resetScore() {
         binding.scoreP1.text = "0"
         binding.scoreP2.text = "0"
     }

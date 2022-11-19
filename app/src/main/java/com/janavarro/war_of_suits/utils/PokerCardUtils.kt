@@ -22,7 +22,7 @@ enum class PokerValue(val score: Int, val symbol: String) {
     Seven(5, "7"),
     Eight(6, "8"),
     Nine(7, "9"),
-    Ten(8, "X"),
+    Ten(8, "10"),
     J(9, "J"),
     Q(10, "Q"),
     K(11, "K"),

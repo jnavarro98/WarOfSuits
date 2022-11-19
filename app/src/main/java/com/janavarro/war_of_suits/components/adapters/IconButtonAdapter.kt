@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.janavarro.war_of_suits.R
 import com.janavarro.war_of_suits.model.IconButton
 
+//We pass the onclick action in the constructor
 class IconButtonAdapter(private val onClick: (IconButton) -> Unit) :
     ListAdapter<IconButton, IconButtonAdapter.IconButtonsViewHolder>(IconButtonDiffCallback) {
 
@@ -28,6 +29,7 @@ class IconButtonAdapter(private val onClick: (IconButton) -> Unit) :
             }
         }
 
+        //Binds the view
         fun bind(iconButton: IconButton) {
             currentIconButton = iconButton
 
@@ -53,6 +55,7 @@ class IconButtonAdapter(private val onClick: (IconButton) -> Unit) :
 
 }
 
+//Needed for list adapter
 object IconButtonDiffCallback : DiffUtil.ItemCallback<IconButton>() {
     override fun areItemsTheSame(oldItem: IconButton, newItem: IconButton): Boolean {
         return oldItem == newItem

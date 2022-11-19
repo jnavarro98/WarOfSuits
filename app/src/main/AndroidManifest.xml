@@ -23,10 +23,9 @@
             </intent-filter>
         </activity>
         <activity
-
             android:name=".ui.game.GameActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
     <queries>
