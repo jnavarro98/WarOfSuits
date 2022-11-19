@@ -26,7 +26,7 @@ class WelcomeSteps : BaseTestCase() {
         super.before()
     }
 
-    @Given("User is on welcome screen")
+    @Given("^User is on welcome screen")
     fun userIsOnWelcomeScreen() {
         run {
             WelcomeScreen {
@@ -35,7 +35,7 @@ class WelcomeSteps : BaseTestCase() {
         }
     }
 
-    @Then("User should see play button")
+    @Then("^User should see play button")
     fun userShouldSeePlayButton() {
         run {
             WelcomeScreen {

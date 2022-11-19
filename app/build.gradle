@@ -15,8 +15,8 @@ android {
         versionCode 3
         versionName "1.2"
 
-        testApplicationId 'com.janavarro.war_of_suits'
-        testInstrumentationRunner 'com.janavarro.war_of_suits'
+        testApplicationId 'com.janavarro.war_of_suits.test'
+        testInstrumentationRunner 'com.janavarro.war_of_suits.runner.AndroidTestRunner'
         testInstrumentationRunnerArguments clearPackageFata: 'true'
     }
 
