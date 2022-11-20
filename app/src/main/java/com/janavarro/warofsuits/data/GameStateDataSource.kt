@@ -87,7 +87,8 @@ class GameStateDataSource(gameState: GameState) {
         return cardP2
     }
 
-    //  Singleton to preserve state on application runtime
+    //Companion to save the data so in the future we can
+    //easily preserve the state
     companion object {
         private var INSTANCE: GameStateDataSource? = null
 

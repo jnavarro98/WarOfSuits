@@ -12,6 +12,7 @@ class Diamonds(override val score: Int = -1) : Suit(R.drawable.ic_diamonds, scor
 class Clubs(override val score: Int = -1) : Suit(R.drawable.ic_clubs, score)
 class Hearts(override val score: Int = -1) : Suit(R.drawable.ic_hearts, score)
 class Spades(override val score: Int = -1) : Suit(R.drawable.ic_spades, score)
+
 //Default value for card view, it is an object because it has a fixed score
 object EmptySuit : Suit(-1, -1)
 

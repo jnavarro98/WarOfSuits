@@ -68,7 +68,7 @@ class PokerCardView @JvmOverloads constructor(
     //Animation of drawing a card
     override fun onVisibilityChanged(changedView: View, visibility: Int) {
         super.onVisibilityChanged(changedView, visibility)
-        if(visibility == VISIBLE) {
+        if (visibility == VISIBLE) {
             val flipOutAnimatorSet =
                 AnimatorInflater.loadAnimator(
                     context,

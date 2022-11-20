@@ -10,7 +10,6 @@ enum class Winner {
 enum class GameCurrentState {
     Playing,
     TurnFinished,
-    DrawingCard,
     Finished
 }
 

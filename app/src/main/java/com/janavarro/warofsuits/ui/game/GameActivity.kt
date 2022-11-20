@@ -16,6 +16,7 @@ import com.janavarro.warofsuits.utils.Winner
 class GameActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGameBinding
+
     //View model factory so we can inject dependencies
     private val gameActivityViewModel by viewModels<GameViewModel> {
         GameViewModelFactory(this)

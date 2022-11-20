@@ -59,7 +59,7 @@ class GameStateDataSourceTest {
         //Game State of a game that has just finished but hasn't been reset
         gameStateDataSource = GameStateDataSource(
             GameState(
-                p1Score =  26,
+                p1Score = 26,
                 p2Score = 26,
                 gameCurrentState = GameCurrentState.TurnFinished,
                 decks = testUsedDeck,
@@ -99,7 +99,7 @@ class GameStateDataSourceTest {
         val testGameState = GameState(decks = testDecks)
         gameStateDataSource = GameStateDataSource(testGameState)
         //Checking that we are using the deck we passed
-        for(i in 0 until CARDS_PER_PLAYER_DECK) {
+        for (i in 0 until CARDS_PER_PLAYER_DECK) {
             Assert.assertEquals(
                 p1Deck[i],
                 gameStateDataSource.drawP1Card()
@@ -110,4 +110,5 @@ class GameStateDataSourceTest {
             )
         }
     }
+
 }
