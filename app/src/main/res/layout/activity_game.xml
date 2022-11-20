@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--Constraint layout lets me design screens for all sizes-->
+<!--also makes really easy to design screens with guidelines-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -34,6 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:background="@drawable/bg_card_back"
         android:scaleX="-1"
         android:scaleY="-1"
         app:layout_constraintBottom_toBottomOf="@id/separator_top_card_p2"
@@ -46,6 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:background="@drawable/bg_card_back"
         app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p1"
         app:layout_constraintEnd_toEndOf="@id/separator_right_current_card"
         app:layout_constraintStart_toStartOf="@id/separator_left_current_card"

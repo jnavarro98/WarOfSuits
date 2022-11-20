@@ -22,6 +22,7 @@ class IconButtonView @JvmOverloads constructor(
         attrs?.let { setAttributes(context, it) }
     }
 
+    //Sets attributes for xml design capabilities
     private fun setAttributes(context: Context, attrs: AttributeSet) {
         val attributes =
             context.theme.obtainStyledAttributes(attrs, R.styleable.IconButtonView, 0, 0)

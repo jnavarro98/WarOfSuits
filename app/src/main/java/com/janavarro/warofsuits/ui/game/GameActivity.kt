@@ -139,9 +139,6 @@ class GameActivity : AppCompatActivity() {
             binding.cardContainerP1.removeAllViews()
             binding.cardContainerP1.addView(cardView)
             binding.btDrawCardP1.isEnabled = false
-        } else {
-            //Game finished
-            throw Exception("The game should've finished by this moment")
         }
     }
 
@@ -155,9 +152,6 @@ class GameActivity : AppCompatActivity() {
             binding.cardContainerP2.removeAllViews()
             binding.cardContainerP2.addView(cardView)
             binding.btDrawCardP2.isEnabled = false
-        } else {
-            //Game finished
-            throw Exception("The game should've finished by this moment")
         }
     }
 

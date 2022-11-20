@@ -10,7 +10,7 @@ import com.janavarro.warofsuits.utils.GameCurrentState
 import com.janavarro.warofsuits.utils.Winner
 import com.janavarro.warofsuits.utils.generateDecks
 
-/* Handles operations on gameState and holds details about it.*/
+/* Handles operations on game state and holds details about it.*/
 class GameStateDataSource(gameState: GameState) {
 
     private val _scoreP1 = MutableLiveData(gameState.p1Score)
@@ -31,6 +31,8 @@ class GameStateDataSource(gameState: GameState) {
     val gameWinner: LiveData<Winner>
         get() = _gameWinner
 
+    /*Even tho you can calculate the total score with the players' score
+    this is way easier for me to read*/
     var totalScore = gameState.totalScore
         private set
 
@@ -41,7 +43,7 @@ class GameStateDataSource(gameState: GameState) {
         totalScore = totalScore.plus(SCORE_INCREASE)
         val p1Score = scoreP1.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
-        //so the winner is set before triggering the turn winner dialog
+        //so the winner is set before triggering the turn winner dialog (triggered by score change)
         _scoreP1.postValue(p1Score)
     }
 
@@ -49,7 +51,7 @@ class GameStateDataSource(gameState: GameState) {
         totalScore = totalScore.plus(SCORE_INCREASE)
         val p2Score = scoreP2.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
-        //so the winner is set before triggering the turn winner dialog
+        //so the winner is set before triggering the turn winner dialog (triggered by score change)
         _scoreP2.postValue(p2Score)
     }
 
@@ -71,6 +73,7 @@ class GameStateDataSource(gameState: GameState) {
         cardP1 = null
         cardP2 = null
     }
+
 
     fun drawP1Card(): Card? {
         val drawnCard = decks.p1Deck.removeLastOrNull()

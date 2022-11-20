@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.janavarro.warofsuits.R
 import com.janavarro.warofsuits.model.IconButton
 
-//We pass the onclick action in the constructor
+//We pass the onclick action in the constructor to ease its use
 class IconButtonAdapter(private val onClick: (IconButton) -> Unit) :
     ListAdapter<IconButton, IconButtonAdapter.IconButtonsViewHolder>(IconButtonDiffCallback) {
 
@@ -21,6 +21,7 @@ class IconButtonAdapter(private val onClick: (IconButton) -> Unit) :
         private val iconButtonIcon: ImageView = itemView.findViewById(R.id.iv_icon)
         private var currentIconButton: IconButton? = null
 
+        //Sets click action
         init {
             itemView.setOnClickListener {
                 currentIconButton?.let {

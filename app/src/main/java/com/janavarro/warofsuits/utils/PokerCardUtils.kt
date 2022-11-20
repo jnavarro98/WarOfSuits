@@ -54,3 +54,7 @@ fun generateDecks(): Decks {
 }
 
 private fun getSuitPriority() = listOf(0, 1, 2, 3).shuffled()
+
+object PokerCardConstants {
+    const val ROYAL_CARDS_SYMBOL_SIZE = 50f
+}

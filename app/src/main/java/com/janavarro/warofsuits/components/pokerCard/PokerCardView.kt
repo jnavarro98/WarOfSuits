@@ -18,6 +18,7 @@ class PokerCardView @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
 
+    //Using view binding instead of data binding because is easier to customize this way
     private val binding = ViewCardBinding.inflate(LayoutInflater.from(context), this, true)
 
     var suit: Suit = EmptySuit
@@ -36,7 +37,6 @@ class PokerCardView @JvmOverloads constructor(
                 binding.cardContent.value = newPokerValue
             }
         }
-
 
     private fun drawStars() {
         when (suit.score) {

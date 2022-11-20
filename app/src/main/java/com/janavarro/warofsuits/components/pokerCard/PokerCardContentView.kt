@@ -5,10 +5,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.GridLayout
 import com.janavarro.warofsuits.R
-import com.janavarro.warofsuits.components.pokerCard.GameConstants.ROYAL_CARDS_SYMBOL_SIZE
 import com.janavarro.warofsuits.databinding.ViewCardContentBinding
 import com.janavarro.warofsuits.utils.DrawUtils
 import com.janavarro.warofsuits.utils.EmptySuit
+import com.janavarro.warofsuits.utils.PokerCardConstants.ROYAL_CARDS_SYMBOL_SIZE
 import com.janavarro.warofsuits.utils.PokerValue
 import com.janavarro.warofsuits.utils.Suit
 
@@ -21,6 +21,7 @@ class PokerCardContentView @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : GridLayout(context, attrs) {
 
+    //Using view binding instead of data binding because is easier to customize this way
     private val binding = ViewCardContentBinding.inflate(LayoutInflater.from(context), this, true)
 
     var suit: Suit = EmptySuit
@@ -149,7 +150,13 @@ class PokerCardContentView @JvmOverloads constructor(
                 binding.iv00.visibility = VISIBLE
                 binding.iv00.setImageResource(suit.image)
                 binding.iv11.visibility = VISIBLE
-                binding.iv11.setImageResource(R.drawable.ic_10)
+                binding.iv11.setImageBitmap(
+                    DrawUtils().textAsBitmap(
+                        value.symbol,
+                        ROYAL_CARDS_SYMBOL_SIZE,
+                        context.getColor(R.color.black)
+                    )
+                )
                 binding.iv22.visibility = VISIBLE
                 binding.iv22.setImageResource(suit.image)
             }
@@ -160,7 +167,7 @@ class PokerCardContentView @JvmOverloads constructor(
                 binding.iv11.visibility = VISIBLE
                 binding.iv11.setImageBitmap(
                     DrawUtils().textAsBitmap(
-                        PokerValue.J.symbol,
+                        value.symbol,
                         ROYAL_CARDS_SYMBOL_SIZE,
                         context.getColor(R.color.black)
                     )
@@ -173,7 +180,13 @@ class PokerCardContentView @JvmOverloads constructor(
                 binding.iv00.visibility = VISIBLE
                 binding.iv00.setImageResource(suit.image)
                 binding.iv11.visibility = VISIBLE
-                binding.iv11.setImageResource(R.drawable.ic_queen)
+                binding.iv11.setImageBitmap(
+                    DrawUtils().textAsBitmap(
+                        value.symbol,
+                        ROYAL_CARDS_SYMBOL_SIZE,
+                        context.getColor(R.color.black)
+                    )
+                )
                 binding.iv22.visibility = VISIBLE
                 binding.iv22.setImageResource(suit.image)
             }
@@ -182,7 +195,13 @@ class PokerCardContentView @JvmOverloads constructor(
                 binding.iv00.visibility = VISIBLE
                 binding.iv00.setImageResource(suit.image)
                 binding.iv11.visibility = VISIBLE
-                binding.iv11.setImageResource(R.drawable.ic_king)
+                binding.iv11.setImageBitmap(
+                    DrawUtils().textAsBitmap(
+                        value.symbol,
+                        ROYAL_CARDS_SYMBOL_SIZE,
+                        context.getColor(R.color.black)
+                    )
+                )
                 binding.iv22.visibility = VISIBLE
                 binding.iv22.setImageResource(suit.image)
             }
@@ -194,8 +213,4 @@ class PokerCardContentView @JvmOverloads constructor(
         }
     }
 
-}
-
-object GameConstants {
-    const val ROYAL_CARDS_SYMBOL_SIZE = 50f
 }
