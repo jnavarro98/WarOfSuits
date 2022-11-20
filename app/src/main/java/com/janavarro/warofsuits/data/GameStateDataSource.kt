@@ -31,8 +31,6 @@ class GameStateDataSource(gameState: GameState) {
     val gameWinner: LiveData<Winner>
         get() = _gameWinner
 
-    /*Even tho you can calculate the total score with the players' score
-    this is way easier for me to read*/
     var drawnCards = gameState.drawnCards
         private set
 
@@ -42,17 +40,13 @@ class GameStateDataSource(gameState: GameState) {
     fun addP1Score() {
         drawnCards = drawnCards.plus(SCORE_INCREASE)
         val p1Score = scoreP1.value?.plus(SCORE_INCREASE)
-        //I post the value instead of setting it because I want a little delay for race condition reasons
-        //so the winner is set before triggering the turn winner dialog (triggered by score change)
-        _scoreP1.postValue(p1Score)
+        _scoreP1.value = p1Score
     }
 
     fun addP2Score() {
         drawnCards = drawnCards.plus(SCORE_INCREASE)
         val p2Score = scoreP2.value?.plus(SCORE_INCREASE)
-        //I post the value instead of setting it because I want a little delay for race condition reasons
-        //so the winner is set before triggering the turn winner dialog (triggered by score change)
-        _scoreP2.postValue(p2Score)
+        _scoreP2.value = p2Score
     }
 
     fun setGameCurrentState(newGameState: GameCurrentState) {
