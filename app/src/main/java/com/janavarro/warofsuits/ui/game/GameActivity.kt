@@ -121,7 +121,7 @@ class GameActivity : AppCompatActivity() {
         builder.setTitle(title)
         builder.setMessage(
             String.format(
-                getString(R.string.subtitle_cureent_points),
+                getString(R.string.subtitle_current_points),
                 currentPoints
             )
         )

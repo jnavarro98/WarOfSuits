@@ -7,7 +7,7 @@
     <string name="bt_finish_game">FINISH GAME</string>
     <string name="title_p1_turn">P1 Wins turn!</string>
     <string name="ok_caps">OK</string>
-    <string name="subtitle_cureent_points">Now he has %1d points</string>
+    <string name="subtitle_current_points">Now he has %1d points</string>
     <string name="title_p2_turn">P2 Wins turn!</string>
     <string name="p1_win_message">PLAYER 1 HAS WON</string>
     <string name="p2_win_message">PLAYER 2 HAS WON</string>
