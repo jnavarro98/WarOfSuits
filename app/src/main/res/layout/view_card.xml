@@ -90,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="A" />
 
-    <com.janavarro.war_of_suits.components.pokerCard.PokerCardContentView
+    <com.janavarro.warofsuits.components.pokerCard.PokerCardContentView
         android:id="@+id/card_content"
         android:layout_width="0dp"
         android:layout_height="0dp"

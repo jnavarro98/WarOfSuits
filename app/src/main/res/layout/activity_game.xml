@@ -160,7 +160,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.80" />
 
-    <com.janavarro.war_of_suits.components.iconButton.IconButtonView
+    <com.janavarro.warofsuits.components.iconButton.IconButtonView
         android:id="@+id/bt_draw_card_p2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -174,7 +174,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/bt_draw_card" />
 
-    <com.janavarro.war_of_suits.components.iconButton.IconButtonView
+    <com.janavarro.warofsuits.components.iconButton.IconButtonView
         android:id="@+id/bt_draw_card_p1"
         android:layout_width="0dp"
         android:layout_height="0dp"

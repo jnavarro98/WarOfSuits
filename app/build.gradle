@@ -2,22 +2,32 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
 }
 
 android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.janavarro.war_of_suits"
+        applicationId "com.janavarro.warofsuits"
         minSdk 24
         targetSdk 32
         versionCode 3
         versionName "1.2"
 
-        testApplicationId 'com.janavarro.war_of_suits.test'
-        testInstrumentationRunner 'com.janavarro.war_of_suits.runner.AndroidTestRunner'
-        testInstrumentationRunnerArguments clearPackageFata: 'true'
+        testApplicationId 'com.janavarro.warofsuits.test'
+        testInstrumentationRunner 'com.janavarro.warofsuits.test.WarOfSuitsAndroidTestRunner'
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+
+    }
+
+    testBuildType "debug"
+
+    sourceSets {
+        androidTest {
+            assets {
+                srcDirs 'src\\androidTest\\assets'
+            }
+        }
     }
 
     viewBinding {
@@ -44,8 +54,6 @@ android {
         ]
     }
 
-    testBuildType "debug"
-
     testOptions {
         animationsDisabled = true
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
@@ -66,14 +74,12 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.8.0'
     testImplementation "org.mockito:mockito-inline:3.11.2"
     testImplementation 'androidx.test:core-ktx:1.5.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.0'
     androidTestImplementation 'io.cucumber:cucumber-android:4.8.3'
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.1'
     androidTestImplementation 'androidx.test:runner:1.5.1'
     androidTestImplementation 'androidx.test:rules:1.5.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestUtil 'androidx.test:orchestrator:1.4.2'
-
 
 }
