@@ -1,9 +1,13 @@
 package com.janavarro.warofsuits.components.pokerCard
 
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.view.View
+import android.widget.FrameLayout
+import com.janavarro.warofsuits.R
 import com.janavarro.warofsuits.databinding.ViewCardBinding
 import com.janavarro.warofsuits.utils.EmptySuit
 import com.janavarro.warofsuits.utils.PokerValue
@@ -16,7 +20,7 @@ import com.janavarro.warofsuits.utils.Suit
 class PokerCardView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
-) : ConstraintLayout(context, attrs) {
+) : FrameLayout(context, attrs) {
 
     //Using view binding instead of data binding because is easier to customize this way
     private val binding = ViewCardBinding.inflate(LayoutInflater.from(context), this, true)
@@ -58,6 +62,27 @@ class PokerCardView @JvmOverloads constructor(
                 binding.leftStar.visibility = VISIBLE
                 binding.rightStar.visibility = VISIBLE
             }
+        }
+    }
+
+    //Animation of drawing a card
+    override fun onVisibilityChanged(changedView: View, visibility: Int) {
+        super.onVisibilityChanged(changedView, visibility)
+        if(visibility == VISIBLE) {
+            val flipOutAnimatorSet =
+                AnimatorInflater.loadAnimator(
+                    context,
+                    R.animator.card_container_animation
+                ) as AnimatorSet
+            flipOutAnimatorSet.setTarget(changedView.parent)
+            val flipInAnimationSet =
+                AnimatorInflater.loadAnimator(
+                    context,
+                    R.animator.card_animation
+                ) as AnimatorSet
+            flipInAnimationSet.setTarget(changedView)
+            flipOutAnimatorSet.start()
+            flipInAnimationSet.start()
         }
     }
 }

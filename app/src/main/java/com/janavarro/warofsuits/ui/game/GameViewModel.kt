@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.janavarro.warofsuits.data.GameStateDataSource
 import com.janavarro.warofsuits.model.Card
-import com.janavarro.warofsuits.utils.GameConstants.MAX_SCORE
+import com.janavarro.warofsuits.utils.GameConstants.AMOUNT_OF_POKER_CARDS
 import com.janavarro.warofsuits.utils.GameCurrentState
 import com.janavarro.warofsuits.utils.Winner
 import com.janavarro.warofsuits.utils.compareTo
@@ -32,7 +32,7 @@ class GameViewModel(private val gameStateDataSource: GameStateDataSource) : View
                 } else {
                     gameStateDataSource.addP2Score()
                 }
-                if (gameStateDataSource.totalScore == MAX_SCORE) {
+                if (gameStateDataSource.drawnCards == AMOUNT_OF_POKER_CARDS) {
                     checkWinner()
                 }
                 gameStateDataSource.setGameCurrentState(GameCurrentState.TurnFinished)
@@ -48,15 +48,18 @@ class GameViewModel(private val gameStateDataSource: GameStateDataSource) : View
         }
     }
 
-    fun drawP1Card(): Card? {
+    fun drawP1Card(): Card {
         val drawnCard = gameStateDataSource.drawP1Card()
         if (drawnCard != null) {
             cardP1 = drawnCard
             checkGameState()
         } else {
-            Log.wtf(TAG, NoSuchElementException("Deck from P1 got empty!"))
+            //Log and throw exception, deck should never get to be empty
+            val exception = NoSuchElementException("Deck from P1 got empty!")
+            Log.wtf(TAG, exception)
+            throw Exception()
         }
-        return drawnCard!!
+        return drawnCard
     }
 
     fun drawP2Card(): Card {
@@ -65,9 +68,12 @@ class GameViewModel(private val gameStateDataSource: GameStateDataSource) : View
             cardP2 = drawnCard
             checkGameState()
         } else {
-            Log.wtf(TAG, NoSuchElementException("Deck from P2 got empty!"))
+            //Log and throw exception, deck should never get to be empty
+            val exception = NoSuchElementException("Deck from P2 got empty!")
+            Log.wtf(TAG, exception)
+            throw Exception()
         }
-        return drawnCard!!
+        return drawnCard
     }
 
     fun startNewTurn() {

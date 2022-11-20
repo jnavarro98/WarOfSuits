@@ -14,6 +14,8 @@ class GameViewModelTest {
 
     private lateinit var viewModel: GameViewModel
 
+    /*I mock it because I want to test only the view model
+    **datasource operations are tested in GameStateDataSourceTest*/
     @Mock
     private lateinit var gameStateDataSource: GameStateDataSource
 
@@ -66,7 +68,7 @@ class GameViewModelTest {
         `when`(gameStateDataSource.drawP2Card()).thenReturn(Card(PokerValue.Two, Hearts(1)))
         `when`(gameStateDataSource.scoreP1).thenReturn(MutableLiveData(28))
         `when`(gameStateDataSource.scoreP2).thenReturn(MutableLiveData(24))
-        `when`(gameStateDataSource.totalScore).thenReturn(GameConstants.MAX_SCORE)
+        `when`(gameStateDataSource.drawnCards).thenReturn(GameConstants.AMOUNT_OF_POKER_CARDS)
         viewModel.drawP1Card()
         viewModel.drawP2Card()
 
@@ -79,7 +81,7 @@ class GameViewModelTest {
         `when`(gameStateDataSource.drawP2Card()).thenReturn(Card(PokerValue.Two, Hearts(1)))
         `when`(gameStateDataSource.scoreP1).thenReturn(MutableLiveData(24))
         `when`(gameStateDataSource.scoreP2).thenReturn(MutableLiveData(28))
-        `when`(gameStateDataSource.totalScore).thenReturn(GameConstants.MAX_SCORE)
+        `when`(gameStateDataSource.drawnCards).thenReturn(GameConstants.AMOUNT_OF_POKER_CARDS)
         viewModel.drawP1Card()
         viewModel.drawP2Card()
 
@@ -92,7 +94,7 @@ class GameViewModelTest {
         `when`(gameStateDataSource.drawP2Card()).thenReturn(Card(PokerValue.Two, Hearts(1)))
         `when`(gameStateDataSource.scoreP1).thenReturn(MutableLiveData(26))
         `when`(gameStateDataSource.scoreP2).thenReturn(MutableLiveData(26))
-        `when`(gameStateDataSource.totalScore).thenReturn(GameConstants.MAX_SCORE)
+        `when`(gameStateDataSource.drawnCards).thenReturn(GameConstants.AMOUNT_OF_POKER_CARDS)
         viewModel.drawP1Card()
         viewModel.drawP2Card()
 

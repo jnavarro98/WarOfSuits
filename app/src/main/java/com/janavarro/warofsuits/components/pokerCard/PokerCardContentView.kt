@@ -31,6 +31,7 @@ class PokerCardContentView @JvmOverloads constructor(
             newValue?.let { fillContent(it) }
         }
 
+    //Each card has its design
     private fun fillContent(value: PokerValue) {
         when (value) {
             PokerValue.Two -> {

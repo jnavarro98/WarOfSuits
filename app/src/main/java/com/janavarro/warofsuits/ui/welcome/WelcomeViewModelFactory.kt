@@ -8,7 +8,8 @@ import com.janavarro.warofsuits.data.IconButtonDataSource
 import com.janavarro.warofsuits.model.IconButton
 import com.janavarro.warofsuits.ui.game.GameActivity
 
-//TODO: In the future we can show more buttons depending on saved preferences.
+//Injects dependencies to view model
+//TODO: In the future we can show more buttons depending on saved preferences. (Continue game etc...)
 class WelcomeViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -16,6 +16,7 @@ import com.janavarro.warofsuits.utils.Winner
 class GameActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGameBinding
+    //View model factory so we can inject dependencies
     private val gameActivityViewModel by viewModels<GameViewModel> {
         GameViewModelFactory(this)
     }
@@ -87,8 +88,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         binding.btExit.setOnClickListener {
-            gameActivityViewModel.resetGameState()
-            finish()
+            exitGame()
         }
     }
 
@@ -131,28 +131,24 @@ class GameActivity : AppCompatActivity() {
 
     private fun drawP1Card() {
         val drawnCard = gameActivityViewModel.drawP1Card()
-        if (drawnCard != null) {
-            val cardView = PokerCardView(this).apply {
-                suit = drawnCard.suit
-                pokerValue = drawnCard.pokerValue
-            }
-            binding.cardContainerP1.removeAllViews()
-            binding.cardContainerP1.addView(cardView)
-            binding.btDrawCardP1.isEnabled = false
+        val cardView = PokerCardView(this).apply {
+            suit = drawnCard.suit
+            pokerValue = drawnCard.pokerValue
         }
+        binding.cardContainerP1.removeAllViews()
+        binding.cardContainerP1.addView(cardView)
+        binding.btDrawCardP1.isEnabled = false
     }
 
     private fun drawP2Card() {
         val drawnCard = gameActivityViewModel.drawP2Card()
-        if (drawnCard != null) {
-            val cardView = PokerCardView(this).apply {
-                suit = drawnCard.suit
-                pokerValue = drawnCard.pokerValue
-            }
-            binding.cardContainerP2.removeAllViews()
-            binding.cardContainerP2.addView(cardView)
-            binding.btDrawCardP2.isEnabled = false
+        val cardView = PokerCardView(this).apply {
+            suit = drawnCard.suit
+            pokerValue = drawnCard.pokerValue
         }
+        binding.cardContainerP2.removeAllViews()
+        binding.cardContainerP2.addView(cardView)
+        binding.btDrawCardP2.isEnabled = false
     }
 
     private fun finishTurn() {

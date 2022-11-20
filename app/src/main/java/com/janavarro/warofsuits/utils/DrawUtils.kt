@@ -5,7 +5,8 @@ import android.graphics.Canvas
 import android.graphics.Paint
 
 class DrawUtils {
-
+    /*Since in my design cards can have up to 9 icons
+    **I draw the card value for those that aren't fit*/
     fun textAsBitmap(text: String, textSize: Float, textColor: Int): Bitmap? {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         paint.textSize = textSize

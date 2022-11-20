@@ -17,6 +17,7 @@ import com.janavarro.warofsuits.model.launch
 class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWelcomeBinding
+//  View model factory so we can inject dependencies
     private val welcomeActivityViewModel by viewModels<WelcomeViewModel> {
         WelcomeViewModelFactory(this)
     }

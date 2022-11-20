@@ -10,7 +10,7 @@ data class GameState(
     val gameCurrentState: GameCurrentState = GameCurrentState.Finished,
     val decks: Decks = generateDecks(),
     val gameWinner: Winner = Winner.Unset,
-    val totalScore: Int = 0,
+    val drawnCards: Int = 0,
     val cardP1: Card? = null,
     val cardP2: Card? = null
 )

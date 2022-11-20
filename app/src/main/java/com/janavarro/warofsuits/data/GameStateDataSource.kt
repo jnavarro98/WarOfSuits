@@ -33,14 +33,14 @@ class GameStateDataSource(gameState: GameState) {
 
     /*Even tho you can calculate the total score with the players' score
     this is way easier for me to read*/
-    var totalScore = gameState.totalScore
+    var drawnCards = gameState.drawnCards
         private set
 
     var cardP1: Card? = gameState.cardP1
     var cardP2: Card? = gameState.cardP2
 
     fun addP1Score() {
-        totalScore = totalScore.plus(SCORE_INCREASE)
+        drawnCards = drawnCards.plus(SCORE_INCREASE)
         val p1Score = scoreP1.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
         //so the winner is set before triggering the turn winner dialog (triggered by score change)
@@ -48,7 +48,7 @@ class GameStateDataSource(gameState: GameState) {
     }
 
     fun addP2Score() {
-        totalScore = totalScore.plus(SCORE_INCREASE)
+        drawnCards = drawnCards.plus(SCORE_INCREASE)
         val p2Score = scoreP2.value?.plus(SCORE_INCREASE)
         //I post the value instead of setting it because I want a little delay for race condition reasons
         //so the winner is set before triggering the turn winner dialog (triggered by score change)
@@ -69,24 +69,25 @@ class GameStateDataSource(gameState: GameState) {
         _scoreP1.value = 0
         _scoreP2.value = 0
         decks = generateDecks()
-        totalScore = 0
+        drawnCards = 0
         cardP1 = null
         cardP2 = null
     }
 
 
     fun drawP1Card(): Card? {
-        val drawnCard = decks.p1Deck.removeLastOrNull()
+        val drawnCard = decks.p1Deck.removeFirstOrNull()
         cardP1 = drawnCard
         return cardP1
     }
 
     fun drawP2Card(): Card? {
-        val drawnCard = decks.p2Deck.removeLastOrNull()
+        val drawnCard = decks.p2Deck.removeFirstOrNull()
         cardP2 = drawnCard
         return cardP2
     }
 
+    //  Singleton to preserve state on application runtime
     companion object {
         private var INSTANCE: GameStateDataSource? = null
 

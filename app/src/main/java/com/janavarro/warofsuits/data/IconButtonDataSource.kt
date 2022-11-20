@@ -9,7 +9,7 @@ class IconButtonDataSource(iconButtons: List<IconButton>) {
     private val initialIconButtonList = iconButtons
     private val iconButtonListLiveData = MutableLiveData(initialIconButtonList)
 
-    /* Adds iconButton to liveData and posts pokerValue. */
+    /* Adds iconButton to liveData and posts its value. */
     fun addIconButton(iconButton: IconButton) {
         val currentList = iconButtonListLiveData.value
         if (currentList == null) {
@@ -21,7 +21,7 @@ class IconButtonDataSource(iconButtons: List<IconButton>) {
         }
     }
 
-    /* Removes iconButton from liveData and posts updated list. */
+    /* Removes iconButton from liveData and posts its value. */
     fun removeIconButton(iconButton: IconButton) {
         val currentList = iconButtonListLiveData.value
         if (currentList != null) {
@@ -35,6 +35,7 @@ class IconButtonDataSource(iconButtons: List<IconButton>) {
         return iconButtonListLiveData
     }
 
+    //  Singleton to preserve state on application runtime
     companion object {
         private var INSTANCE: IconButtonDataSource? = null
 

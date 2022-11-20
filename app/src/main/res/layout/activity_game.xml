@@ -61,10 +61,10 @@
         android:fontFamily="@font/vonique_64_bold"
         android:textColor="@color/black"
         android:textSize="@dimen/score_number_size"
-        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p1"
-        app:layout_constraintEnd_toEndOf="@id/separator_left_current_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/separator_start_buttons"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/separator_top_card_p1" />
+        app:layout_constraintTop_toTopOf="@id/separator_button_card_p1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,10 +75,10 @@
         android:text="@string/p2_label"
         android:textColor="@color/black"
         android:textSize="@dimen/score_number_size"
-        app:layout_constraintBottom_toBottomOf="@id/separator_top_card_p2"
-        app:layout_constraintEnd_toEndOf="@id/separator_left_current_card"
+        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p2"
+        app:layout_constraintEnd_toEndOf="@id/separator_start_buttons"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/separator_button_card_p2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,10 +87,10 @@
         android:text="@string/p1_label"
         android:textColor="@color/black"
         android:textSize="@dimen/score_number_size"
-        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/separator_right_current_card"
-        app:layout_constraintTop_toTopOf="@id/separator_top_card_p1" />
+        app:layout_constraintStart_toStartOf="@id/separator_end_buttons"
+        app:layout_constraintTop_toTopOf="@id/separator_button_card_p1" />
 
     <TextView
         android:id="@+id/score_p2"
@@ -101,10 +101,10 @@
         android:scaleY="-1"
         android:textColor="@color/black"
         android:textSize="@dimen/score_number_size"
-        app:layout_constraintBottom_toBottomOf="@id/separator_top_card_p2"
+        app:layout_constraintBottom_toBottomOf="@id/separator_button_card_p2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/separator_right_current_card"
-        app:layout_constraintTop_toTopOf="@id/separator_button_card_p2" />
+        app:layout_constraintStart_toStartOf="@id/separator_end_buttons"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/separator_button_card_p2"
