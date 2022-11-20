@@ -21,7 +21,7 @@ class WelcomeActivity : AppCompatActivity() {
         WelcomeViewModelFactory(this)
     }
     private val layoutManager = LinearLayoutManager(this)
-    private lateinit var iconButtonAdapter : IconButtonAdapter
+    private lateinit var iconButtonAdapter: IconButtonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

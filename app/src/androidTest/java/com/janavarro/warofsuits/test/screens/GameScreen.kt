@@ -1,4 +1,4 @@
-package com.janavarro.warofsuits.screens
+package com.janavarro.warofsuits.test.screens
 
 import com.janavarro.warofsuits.R
 import com.janavarro.warofsuits.ui.game.GameActivity

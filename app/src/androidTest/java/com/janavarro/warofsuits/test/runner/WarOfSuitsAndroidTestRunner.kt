@@ -1,7 +1,7 @@
-package com.janavarro.warofsuits.test
+package com.janavarro.warofsuits.test.runner
 
 import io.cucumber.android.runner.CucumberAndroidJUnitRunner
 import io.cucumber.junit.CucumberOptions
 
-@CucumberOptions(glue = ["com.janavarro.warofsuits.steps"], features = ["features"])
+@CucumberOptions(glue = ["steps"], features = ["features"])
 class WarOfSuitsAndroidTestRunner : CucumberAndroidJUnitRunner()

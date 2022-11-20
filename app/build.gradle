@@ -5,6 +5,19 @@ plugins {
 }
 
 android {
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+        }
+    }
+
     compileSdk 32
 
     defaultConfig {
@@ -15,7 +28,7 @@ android {
         versionName "1.2"
 
         testApplicationId 'com.janavarro.warofsuits.test'
-        testInstrumentationRunner 'com.janavarro.warofsuits.test.WarOfSuitsAndroidTestRunner'
+        testInstrumentationRunner 'com.janavarro.warofsuits.test.runner.WarOfSuitsAndroidTestRunner'
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
     }
@@ -25,7 +38,7 @@ android {
     sourceSets {
         androidTest {
             assets {
-                srcDirs 'src\\androidTest\\assets'
+                srcDirs 'src/androidTest/assets'
             }
         }
     }
@@ -34,15 +47,6 @@ android {
         enabled = true
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            minifyEnabled false
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -71,15 +75,19 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
-    testImplementation 'org.mockito:mockito-core:3.8.0'
+    testImplementation 'org.mockito:mockito-core:3.11.2'
     testImplementation "org.mockito:mockito-inline:3.11.2"
     testImplementation 'androidx.test:core-ktx:1.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.5.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.0'
     androidTestImplementation 'io.cucumber:cucumber-android:4.8.3'
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.1'
     androidTestImplementation 'androidx.test:runner:1.5.1'
     androidTestImplementation 'androidx.test:rules:1.5.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.annotation:annotation:1.3.0'
     androidTestUtil 'androidx.test:orchestrator:1.4.2'
 
 }

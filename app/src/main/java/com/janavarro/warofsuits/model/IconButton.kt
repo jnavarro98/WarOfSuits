@@ -11,7 +11,7 @@ data class IconButton(
     val title: String,
     @DrawableRes val image: Int,
     val activityToLaunch: Activity,
-    val uri : Uri = Uri.EMPTY
+    val uri: Uri = Uri.EMPTY
 )
 
 fun IconButton.launch(context: Context) {

@@ -21,8 +21,11 @@ class GameViewModel(private val gameStateDataSource: GameStateDataSource) : View
     private fun checkGameState() {
         cardP1?.let { cardP1 ->
             cardP2?.let { cardP2 ->
-                if (cardP1.compareTo(cardP2) > 0) { gameStateDataSource.addP1Score() }
-                else { gameStateDataSource.addP2Score() }
+                if (cardP1.compareTo(cardP2) > 0) {
+                    gameStateDataSource.addP1Score()
+                } else {
+                    gameStateDataSource.addP2Score()
+                }
                 if (gameStateDataSource.totalScore == MAX_SCORE) {
                     checkWinner()
                 }
@@ -32,21 +35,21 @@ class GameViewModel(private val gameStateDataSource: GameStateDataSource) : View
     }
 
     private fun checkWinner() {
-        when(gameStateDataSource.scoreP1.value?.compareTo(gameStateDataSource.scoreP2.value!!)) {
+        when (gameStateDataSource.scoreP1.value?.compareTo(gameStateDataSource.scoreP2.value!!)) {
             1 -> gameStateDataSource.setWinner(Winner.Player1)
             -1 -> gameStateDataSource.setWinner(Winner.Player2)
             0 -> gameStateDataSource.setWinner(Winner.Tie)
         }
     }
 
-    fun drawP1Card() : Card? {
+    fun drawP1Card(): Card? {
         val drawnCard = gameStateDataSource.drawP1Card()
         cardP1 = drawnCard
         checkGameState()
         return drawnCard
     }
 
-    fun drawP2Card() : Card? {
+    fun drawP2Card(): Card? {
         val drawnCard = gameStateDataSource.drawP2Card()
         cardP2 = drawnCard
         checkGameState()

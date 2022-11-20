@@ -178,5 +178,6 @@ class GameActivity : AppCompatActivity() {
         binding.scoreP2.text = "0"
     }
 
-    override fun onBackPressed() {  /*Blocks user back button, there's UI for this*/ }
+    override fun onBackPressed() {  /*Blocks user back button, there's UI for this*/
+    }
 }

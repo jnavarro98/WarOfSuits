@@ -1,13 +1,14 @@
-package com.janavarro.warofsuits.steps
+package com.janavarro.warofsuits.test.steps
 
-import com.janavarro.warofsuits.screens.GameScreen
-import com.janavarro.warofsuits.screens.WelcomeScreen
+import com.janavarro.warofsuits.test.scenarios.WelcomeScenario
+import com.janavarro.warofsuits.test.screens.GameScreen
+import com.janavarro.warofsuits.test.screens.WelcomeScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 
-class WelcomeSteps : TestCase() {
+class Steps : TestCase() {
 
     @Given("^User is in welcome screen")
     fun userIsOnWelcomeScreen() {
@@ -15,6 +16,13 @@ class WelcomeSteps : TestCase() {
             WelcomeScreen {
                 flakySafely { screenIsDisplayed() }
             }
+        }
+    }
+
+    @Given("^User starts game")
+    fun userStartsGame() {
+        run {
+            scenario(WelcomeScenario())
         }
     }
 
@@ -27,7 +35,7 @@ class WelcomeSteps : TestCase() {
         }
     }
 
-    @Then("^User should game screen")
+    @Then("^Game screen is displayed")
     fun userShouldSeeGameScreen() {
         run {
             GameScreen {
